@@ -2,11 +2,11 @@ class Config {
 
     private static authToken : string = '';
 
-    static setAuthToken = token => {
+    public static setAuthToken = (token : string) => {
         this.authToken = token;
     }
 
-    static getAuthToken = () =>{
+    public static getAuthToken = () =>{
         return this.authToken;
     }
 }

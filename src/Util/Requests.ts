@@ -3,26 +3,33 @@ import RequestTypes from "./RequestTypes"
 
 class Requests {
 
-
-    static post = (url, data) => {
+    public static post = (url :string, data : object, query? : object | null, options? : object | null) => {
         return this._sendRequest(url, RequestTypes.POST, data);
     }
 
-    static put = (url, data) => {
+    public static put = (url :string, data : object, query? : object | null, options? : object | null) => {
         return this._sendRequest(url, RequestTypes.POST, data);
     }
 
-    static get = (url, data) => {
+    public static get = (url :string, query? : object | null, options? : object | null) => {
+        return this._sendRequest(url, RequestTypes.POST, {});
+    }
+
+    public static delete = (url :string, data : object, query? : object | null, options? : object | null) => {
         return this._sendRequest(url, RequestTypes.POST, data);
     }
 
-    static delete = (url, data) => {
-        return this._sendRequest(url, RequestTypes.POST, data);
-    }
+    private static _sendRequest = (url : string, method : string, data? : object, query? : object | null, options? : object | null) => {
 
-    static _sendRequest = (url, method, data) => {
+        let queryParameters = '';
 
-        return window.fetch(url, {
+        if(query){
+            queryParameters = "?" + this.toQueryString(query);
+        }
+
+        let route = "https://bw.bingewave.com/" + url + queryParameters;
+
+        return window.fetch(route, {
             // learn more about this API here: https://graphql-pokemon2.vercel.app/
             method: method,
             headers: {
@@ -35,6 +42,15 @@ class Requests {
             return res.json();
         });
     }
+
+    private static toQueryString = (obj : object) => {
+        var str = [];
+        for (var p in obj)
+          if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+          }
+        return str.join("&");
+      }
 
 }
 

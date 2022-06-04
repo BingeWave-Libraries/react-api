@@ -1,10 +1,10 @@
 declare class Auth {
-    static routeLogin: object;
-    static routeRegister: object;
-    static routeForgotPassword: object;
-    static routeLoginToOrganizer: object;
-    static routeRegisterToOrganizer: object;
-    static login(data: any): Promise<any>;
-    static register(data: any): Promise<any>;
+    private static routeLogin;
+    private static routeRegister;
+    private static routeForgotPassword;
+    private static routeLoginToOrganizer;
+    private static routeRegisterToOrganizer;
+    static login(data: object): Promise<any>;
+    static register(data: object): Promise<any>;
 }
 export default Auth;

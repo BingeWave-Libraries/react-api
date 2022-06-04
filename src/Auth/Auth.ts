@@ -3,36 +3,36 @@ import RequestTypes from "../Util/RequestTypes";
 
 class Auth {
 
-    static routeLogin: object = { 
+    private static routeLogin: object = { 
         route : "/auth/login",
         method : RequestTypes.POST
     };
 
-    static routeRegister: object = { 
+    private static routeRegister: object = { 
         route: "/auth/register",
         method : RequestTypes.POST
     };
 
-    static routeForgotPassword: object = { 
+   private static routeForgotPassword: object = { 
         route: "/auth/forgotpassword",
         method : RequestTypes.POST
     };
 
-    static routeLoginToOrganizer: object= { 
+    private static routeLoginToOrganizer: object= { 
         route: "/auth/loginToOrganizer",
         method : RequestTypes.POST
     };
 
-    static routeRegisterToOrganizer: object = { 
+    private static routeRegisterToOrganizer: object = { 
         route: "/registerToOrganizer",
         method : RequestTypes.POST
     };
 
-    static login(data) {
+    public static login(data : object) {
         return Requests.post(this.routeLogin.route, data);
     }
 
-    static register(data) {
+    public static register(data : object) {
         return Requests.post(this.routeRegister.route, data);
     }
 
