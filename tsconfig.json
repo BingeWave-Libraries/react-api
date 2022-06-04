@@ -16,6 +16,6 @@
     "outDir": "dist",
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "emitDeclarationOnly": true,                              /* Skip type checking all .d.ts files. */
+    "emitDeclarationOnly": false,                              /* Skip type checking all .d.ts files. */
   }
 }

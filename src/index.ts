@@ -1,2 +1,6 @@
-export  * from "./Auth/Auth";
-export  * from "./Config/Config";
+import Auth from "./Auth";
+import Config from "./Config";
+export  * from "./Config";
+
+export  {Auth};
+export {Config};
