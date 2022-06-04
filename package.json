@@ -3,12 +3,13 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/BingeWave-Libraries"
   },
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A library for easily accessing the BingeWave Api",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "types": "dist/index.d.ts",
   "scripts": {
