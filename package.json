@@ -1,5 +1,5 @@
 {
-  "name": "bingewave-react-api",
+  "name": "@BingeWave-Libraries/react-api",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/BingeWave-Libraries"
   },
