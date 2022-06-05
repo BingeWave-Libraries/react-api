@@ -29,16 +29,16 @@ var Requests = /** @class */ (function () {
     var _a;
     _a = Requests;
     Requests.post = function (url, data, query, options) {
-        return _a._sendRequest(url, RequestTypes.POST, data);
+        return _a._sendRequest(url, RequestTypes.POST, data, query, options);
     };
     Requests.put = function (url, data, query, options) {
-        return _a._sendRequest(url, RequestTypes.PUT, data);
+        return _a._sendRequest(url, RequestTypes.PUT, data, query, options);
     };
     Requests.get = function (url, query, options) {
-        return _a._sendRequest(url, RequestTypes.GET, {});
+        return _a._sendRequest(url, RequestTypes.GET, null, query, options);
     };
     Requests.delete = function (url, data, query, options) {
-        return _a._sendRequest(url, RequestTypes.DELETE, data);
+        return _a._sendRequest(url, RequestTypes.DELETE, data, query, options);
     };
     Requests.upload = function (filename, file, url, data, query, options) {
         var formData = new FormData();
@@ -52,7 +52,7 @@ var Requests = /** @class */ (function () {
             queryParameters = "?" + _a.toQueryString(query);
         }
         var body = null;
-        if (data instanceof FormData) {
+        if (data instanceof FormData && data !== null) {
             body = data;
         }
         else if (typeof data === 'object' && data !== null) {
