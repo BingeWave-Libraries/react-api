@@ -4,7 +4,7 @@ declare class Auth {
     private static routeForgotPassword;
     private static routeLoginToOrganizer;
     private static routeRegisterToOrganizer;
-    static login(data: object): Promise<any>;
-    static register(data: object): Promise<any>;
+    static login(data: object, query?: object | null, options?: object | null): Promise<any>;
+    static register(data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 export default Auth;

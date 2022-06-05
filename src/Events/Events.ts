@@ -1,60 +1,65 @@
+import Route from "../Util/Interfaces/Route";
 import Requests from "../Util/Requests";
 import RequestTypes from "../Util/RequestTypes";
 
 class Events {
 
-    private static routeCreateEvent: object = { 
+    private static routeCreateEvent: Route = { 
         route : "/events",
         method : RequestTypes.POST
     };
 
-    private static routeListEvents: object = { 
+    private static routeListEvents: Route = { 
         route : "/events",
         method : RequestTypes.GET
     };
 
-    private static routeUpdateEvent: object = { 
+    private static routeUpdateEvent: Route = { 
         route : "/events/{id}/design",
         method : RequestTypes.PUT
     };
 
-    private static routeUpdateEventDesign: object = { 
+    private static routeUpdateEventDesign: Route = { 
         route : "/events/{id}",
         method : RequestTypes.PUT
     };
 
-    private static routeViewEvent: object = { 
+    private static routeViewEvent: Route = { 
         route : "/events/{id}",
         method : RequestTypes.GET
     };
 
-    private static routeDeleteEvent: object = { 
+    private static routeDeleteEvent: Route = { 
         route : "/events/{id}",
         method : RequestTypes.DELETE
     };
 
-    static createEvent(data : object) {
-        return Requests.post(this.routeCreateEvent.route, data);
+    public static createEvent(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeCreateEvent.route, data, query, options);
     }
 
-    static viewEvent(id : string, data : object) {
-        let route = this.routeViewEvent.route.replaceAll('{id}', id);
-        return Requests.get(route, data);
+    public static viewEvent(event_id : string, query? : object | null, options? : object | null) {
+        let route = this.routeViewEvent.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
     }
 
-    static updateEvent(id : string, data : object) {
-        let route = this.routeUpdateEvent.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    public static getEvents(query? : object | null, options? : object | null) {
+        return Requests.get(this.routeViewEvent.route, query, options);
     }
 
-    static updateEventDesign(id : string, data : object) {
-        let route = this.routeUpdateEventDesign.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    public static updateEvent(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeUpdateEvent.route.replaceAll('{id}', event_id);
+        return Requests.put(route, data, query, options);
     }
 
-    static deleteEvent(id : string, data : object) {
-        let route = this.routeDeleteEvent.route.replaceAll('{id}', id);
-        return Requests.delete(route, data);
+    public static updateEventDesign(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeUpdateEventDesign.route.replaceAll('{id}', event_id);
+        return Requests.put(route, data, query, options);
+    }
+
+    public static deleteEvent(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeDeleteEvent.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
     }
 
 }

@@ -89,11 +89,11 @@ var Requests = /** @class */ (function () {
 var Auth = /** @class */ (function () {
     function Auth() {
     }
-    Auth.login = function (data) {
-        return Requests.post(this.routeLogin.route, data);
+    Auth.login = function (data, query, options) {
+        return Requests.post(this.routeLogin.route, data, query, options);
     };
-    Auth.register = function (data) {
-        return Requests.post(this.routeRegister.route, data);
+    Auth.register = function (data, query, options) {
+        return Requests.post(this.routeRegister.route, data, query, options);
     };
     Auth.routeLogin = {
         route: "/auth/login",
@@ -121,24 +121,27 @@ var Auth = /** @class */ (function () {
 var Events = /** @class */ (function () {
     function Events() {
     }
-    Events.createEvent = function (data) {
-        return Requests.post(this.routeCreateEvent.route, data);
+    Events.createEvent = function (data, query, options) {
+        return Requests.post(this.routeCreateEvent.route, data, query, options);
     };
-    Events.viewEvent = function (id, data) {
-        var route = this.routeViewEvent.route.replaceAll('{id}', id);
-        return Requests.get(route, data);
+    Events.viewEvent = function (event_id, query, options) {
+        var route = this.routeViewEvent.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
     };
-    Events.updateEvent = function (id, data) {
-        var route = this.routeUpdateEvent.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    Events.getEvents = function (query, options) {
+        return Requests.get(this.routeViewEvent.route, query, options);
     };
-    Events.updateEventDesign = function (id, data) {
-        var route = this.routeUpdateEventDesign.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    Events.updateEvent = function (event_id, data, query, options) {
+        var route = this.routeUpdateEvent.route.replaceAll('{id}', event_id);
+        return Requests.put(route, data, query, options);
     };
-    Events.deleteEvent = function (id, data) {
-        var route = this.routeDeleteEvent.route.replaceAll('{id}', id);
-        return Requests.delete(route, data);
+    Events.updateEventDesign = function (event_id, data, query, options) {
+        var route = this.routeUpdateEventDesign.route.replaceAll('{id}', event_id);
+        return Requests.put(route, data, query, options);
+    };
+    Events.deleteEvent = function (event_id, data, query, options) {
+        var route = this.routeDeleteEvent.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
     };
     Events.routeCreateEvent = {
         route: "/events",
@@ -167,44 +170,101 @@ var Events = /** @class */ (function () {
     return Events;
 }());
 
+var Organizers = /** @class */ (function () {
+    function Organizers() {
+    }
+    Organizers.createOrganizer = function (data, query, options) {
+        return Requests.post(this.routeCreateOrganizer.route, data, query, options);
+    };
+    Organizers.updateOrganizer = function (organizer_id, data, query, options) {
+        var route = this.routeUpdateOrganizer.route.replaceAll('{id}', organizer_id);
+        return Requests.put(route, data, query, options);
+    };
+    Organizers.viewOrganizer = function (organizer_id, query, options) {
+        var route = this.routeViewOrganizer.route.replaceAll('{id}', organizer_id);
+        return Requests.get(route, query, options);
+    };
+    Organizers.deleteOrganizer = function (organizer_id, data, query, options) {
+        var route = this.routeDeleterOrganizer.route.replaceAll('{id}', organizer_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Organizers.setUserToRole = function (organizer_id, data, query, options) {
+        var route = this.routeSetUserToRoleWithOganizer.route.replaceAll('{id}', organizer_id);
+        return Requests.post(route, data, query, options);
+    };
+    Organizers.removeUserFromRole = function (organizer_id, data, query, options) {
+        var route = this.routeRemoveUserFromRoleWithOganizer.route.replaceAll('{id}', organizer_id);
+        return Requests.post(route, data, query, options);
+    };
+    Organizers.routeListOrganizers = {
+        route: "/organizers",
+        method: RequestTypes.GET
+    };
+    Organizers.routeCreateOrganizer = {
+        route: "/organizers",
+        method: RequestTypes.POST
+    };
+    Organizers.routeViewOrganizer = {
+        route: "/organizers/{id}",
+        method: RequestTypes.GET
+    };
+    Organizers.routeUpdateOrganizer = {
+        route: "/organizers/{id}",
+        method: RequestTypes.PUT
+    };
+    Organizers.routeDeleterOrganizer = {
+        route: "/organizers/{id}",
+        method: RequestTypes.DELETE
+    };
+    Organizers.routeSetUserToRoleWithOganizer = {
+        route: "/organizers/{id}/setUserToRole",
+        method: RequestTypes.POST
+    };
+    Organizers.routeRemoveUserFromRoleWithOganizer = {
+        route: "/organizers/{id}/removeUserFromRole",
+        method: RequestTypes.POST
+    };
+    return Organizers;
+}());
+
 var Templates = /** @class */ (function () {
     function Templates() {
     }
-    Templates.getTemplates = function (query) {
+    Templates.getTemplates = function (query, options) {
         return Requests.get(this.routeListTemplate.route, query);
     };
-    Templates.createTemplate = function (data) {
-        return Requests.post(this.routeCreateTemplate.route, data);
+    Templates.createTemplate = function (data, query, options) {
+        return Requests.post(this.routeCreateTemplate.route, data, query, options);
     };
-    Templates.viewTemplate = function (id, data) {
-        var route = this.routeViewTemplate.route.replaceAll('{id}', id);
-        return Requests.get(route, data);
+    Templates.viewTemplate = function (template_id, query, options) {
+        var route = this.routeViewTemplate.route.replaceAll('{id}', template_id);
+        return Requests.get(route, query, options);
     };
-    Templates.updateTemplate = function (id, data) {
-        var route = this.routeUpdateTemplate.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    Templates.updateTemplate = function (template_id, data, query, options) {
+        var route = this.routeUpdateTemplate.route.replaceAll('{id}', template_id);
+        return Requests.put(route, data, query, options);
     };
-    Templates.updateTemplateDesign = function (id, data) {
-        var route = this.routeUpdateTemplateDesign.route.replaceAll('{id}', id);
-        return Requests.put(route, data);
+    Templates.updateTemplateDesign = function (template_id, data, query, options) {
+        var route = this.routeUpdateTemplateDesign.route.replaceAll('{id}', template_id);
+        return Requests.put(route, data, query, options);
     };
-    Templates.deleteTemplate = function (id, data) {
-        var route = this.routeDeleteTemplate.route.replaceAll('{id}', id);
-        return Requests.delete(route, data);
+    Templates.deleteTemplate = function (template_id, data, query, options) {
+        var route = this.routeDeleteTemplate.route.replaceAll('{id}', template_id);
+        return Requests.delete(route, data, query, options);
     };
-    Templates.addWidgetToTemplate = function (id, data) {
-        var route = this.routeTemplateAddWidget.replaceAll('{id}', id);
-        return Requests.post(route, data);
+    Templates.addWidgetToTemplate = function (template_id, data, query, options) {
+        var route = this.routeTemplateAddWidget.route.replaceAll('{id}', template_id);
+        return Requests.post(route, data, query, options);
     };
-    Templates.updateAssociatedWidget = function (template_id, widget_id, data) {
-        var route = this.routeTemplateUpdateWidget.replaceAll('{id}', template_id);
+    Templates.updateAssociatedWidget = function (template_id, widget_id, data, query, options) {
+        var route = this.routeTemplateUpdateWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.put(route, data);
+        return Requests.put(route, data, query, options);
     };
-    Templates.setWidgetPositioningOptions = function (template_id, widget_id, data) {
-        var route = this.routeTemplateSetWidgetPositioningOptions.replaceAll('{id}', template_id);
+    Templates.setWidgetPositioningOptions = function (template_id, widget_id, data, query, options) {
+        var route = this.routeTemplateSetWidgetPositioningOptions.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.put(route, data);
+        return Requests.put(route, data, query, options);
     };
     Templates.routeCreateTemplate = {
         route: "/templates",
@@ -269,5 +329,16 @@ var Templates = /** @class */ (function () {
     return Templates;
 }());
 
-export { Auth, Config, Events, Templates };
+var BWAPI = /** @class */ (function () {
+    function BWAPI() {
+    }
+    BWAPI.Auth = Auth;
+    BWAPI.Config = Config;
+    BWAPI.Events = Events;
+    BWAPI.Organizers = Organizers;
+    BWAPI.Templates = Templates;
+    return BWAPI;
+}());
+
+export { Auth, BWAPI, Config, Events, Organizers, Templates };
 //# sourceMappingURL=index.js.map

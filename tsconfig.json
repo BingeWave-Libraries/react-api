@@ -17,5 +17,9 @@
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "emitDeclarationOnly": false,                              /* Skip type checking all .d.ts files. */
+    "lib": [
+      "ES2021.String",
+      "dom"
+    ]
   }
 }

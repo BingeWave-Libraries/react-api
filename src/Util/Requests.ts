@@ -1,4 +1,5 @@
 import Config from "../Config/Config";
+import AnyObject from "./Interfaces/AnyObject";
 import RequestTypes from "./RequestTypes"
 
 class Requests {
@@ -19,7 +20,7 @@ class Requests {
         return this._sendRequest(url, RequestTypes.DELETE, data, query, options);
     }
 
-    public static upload = (filename: string, file: any, url :string, data : object, query? : object | null, options? : object | null) => {
+    public static upload = (filename: string, file: any, url :string, data : AnyObject, query? : object | null, options? : object | null) => {
 
         const formData = new FormData();
 
@@ -48,7 +49,7 @@ class Requests {
 
         let route = "https://bw.bingewave.com/" + url + queryParameters;
 
-        let config = {
+        let config : AnyObject = {
             // learn more about this API here: https://graphql-pokemon2.vercel.app/
             method: method,
             headers: {
@@ -67,7 +68,7 @@ class Requests {
         });
     }
 
-    private static toQueryString = (obj : object) => {
+    private static toQueryString = (obj : AnyObject) => {
         var str = [];
         for (var p in obj)
           if (obj.hasOwnProperty(p)) {
