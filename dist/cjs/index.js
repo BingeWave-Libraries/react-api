@@ -63,16 +63,19 @@ var Requests = /** @class */ (function () {
             body = JSON.stringify(data);
         }
         var route = "https://bw.bingewave.com/" + url + queryParameters;
-        return window.fetch(route, {
+        var config = {
             // learn more about this API here: https://graphql-pokemon2.vercel.app/
             method: method,
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Config.getAuthToken(),
-            },
-            body: body,
-        }).then(function (res) {
+            }
+        };
+        if (body) {
+            config['body'] = body;
+        }
+        return window.fetch(route, config).then(function (res) {
             return res.json();
         });
     };
