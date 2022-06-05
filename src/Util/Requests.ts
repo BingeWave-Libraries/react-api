@@ -8,15 +8,26 @@ class Requests {
     }
 
     public static put = (url :string, data : object, query? : object | null, options? : object | null) => {
-        return this._sendRequest(url, RequestTypes.POST, data);
+        return this._sendRequest(url, RequestTypes.PUT, data);
     }
 
     public static get = (url :string, query? : object | null, options? : object | null) => {
-        return this._sendRequest(url, RequestTypes.POST, {});
+        return this._sendRequest(url, RequestTypes.GET, {});
     }
 
     public static delete = (url :string, data : object, query? : object | null, options? : object | null) => {
-        return this._sendRequest(url, RequestTypes.POST, data);
+        return this._sendRequest(url, RequestTypes.DELETE, data);
+    }
+
+    public static upload = (filename: string, file: any, url :string, data : object, query? : object | null, options? : object | null) => {
+
+        const formData = new FormData();
+
+        formData.append(filename, file)
+
+        Object.keys(data).forEach(key => formData.append(key, data[key]));
+  
+        return this._sendRequest(url, RequestTypes.POST, formData, query, options);
     }
 
     private static _sendRequest = (url : string, method : string, data? : object, query? : object | null, options? : object | null) => {
@@ -25,6 +36,14 @@ class Requests {
 
         if(query){
             queryParameters = "?" + this.toQueryString(query);
+        }
+
+        let body = null;
+
+        if(data instanceof FormData) {
+            body = data;
+        } else if(typeof data === 'object' && data !== null) {
+            body =  JSON.stringify(data);
         }
 
         let route = "https://bw.bingewave.com/" + url + queryParameters;
@@ -37,7 +56,7 @@ class Requests {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Config.getAuthToken(),
             },
-            body: JSON.stringify(data),
+            body: body,
         }).then(function (res) {
             return res.json();
         });

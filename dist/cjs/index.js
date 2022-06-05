@@ -36,18 +36,31 @@ var Requests = /** @class */ (function () {
         return _a._sendRequest(url, RequestTypes.POST, data);
     };
     Requests.put = function (url, data, query, options) {
-        return _a._sendRequest(url, RequestTypes.POST, data);
+        return _a._sendRequest(url, RequestTypes.PUT, data);
     };
     Requests.get = function (url, query, options) {
-        return _a._sendRequest(url, RequestTypes.POST, {});
+        return _a._sendRequest(url, RequestTypes.GET, {});
     };
     Requests.delete = function (url, data, query, options) {
-        return _a._sendRequest(url, RequestTypes.POST, data);
+        return _a._sendRequest(url, RequestTypes.DELETE, data);
+    };
+    Requests.upload = function (filename, file, url, data, query, options) {
+        var formData = new FormData();
+        formData.append(filename, file);
+        Object.keys(data).forEach(function (key) { return formData.append(key, data[key]); });
+        return _a._sendRequest(url, RequestTypes.POST, formData, query, options);
     };
     Requests._sendRequest = function (url, method, data, query, options) {
         var queryParameters = '';
         if (query) {
             queryParameters = "?" + _a.toQueryString(query);
+        }
+        var body = null;
+        if (data instanceof FormData) {
+            body = data;
+        }
+        else if (typeof data === 'object' && data !== null) {
+            body = JSON.stringify(data);
         }
         var route = "https://bw.bingewave.com/" + url + queryParameters;
         return window.fetch(route, {
@@ -58,7 +71,7 @@ var Requests = /** @class */ (function () {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Config.getAuthToken(),
             },
-            body: JSON.stringify(data),
+            body: body,
         }).then(function (res) {
             return res.json();
         });
@@ -158,7 +171,7 @@ var Events = /** @class */ (function () {
 var Templates = /** @class */ (function () {
     function Templates() {
     }
-    Templates.getTemplates = function (data, query) {
+    Templates.getTemplates = function (query) {
         return Requests.get(this.routeListTemplate.route, query);
     };
     Templates.createTemplate = function (data) {
@@ -178,7 +191,21 @@ var Templates = /** @class */ (function () {
     };
     Templates.deleteTemplate = function (id, data) {
         var route = this.routeDeleteTemplate.route.replaceAll('{id}', id);
-        return Requests.get(route, data);
+        return Requests.delete(route, data);
+    };
+    Templates.addWidgetToTemplate = function (id, data) {
+        var route = this.routeTemplateAddWidget.replaceAll('{id}', id);
+        return Requests.post(route, data);
+    };
+    Templates.updateAssociatedWidget = function (template_id, widget_id, data) {
+        var route = this.routeTemplateUpdateWidget.replaceAll('{id}', template_id);
+        route = route.replaceAll('{subid}', widget_id);
+        return Requests.put(route, data);
+    };
+    Templates.setWidgetPositioningOptions = function (template_id, widget_id, data) {
+        var route = this.routeTemplateSetWidgetPositioningOptions.replaceAll('{id}', template_id);
+        route = route.replaceAll('{subid}', widget_id);
+        return Requests.put(route, data);
     };
     Templates.routeCreateTemplate = {
         route: "/templates",
@@ -203,6 +230,42 @@ var Templates = /** @class */ (function () {
     Templates.routeDeleteTemplate = {
         route: "/templates/{id}",
         method: RequestTypes.DELETE
+    };
+    Templates.routeTemplateAddWidget = {
+        route: "/templates/{id}/addWidget",
+        method: RequestTypes.POST
+    };
+    Templates.routeTemplateGetWidgets = {
+        route: "/templates/{id}/getWidgets",
+        method: RequestTypes.GET
+    };
+    Templates.routeTemplateRemoveWidget = {
+        route: "/templates/{id}/removeWidget",
+        method: RequestTypes.DELETE
+    };
+    Templates.routeTemplateUpdateWidget = {
+        route: "/templates/{id}/updateWidget/{subid}",
+        method: RequestTypes.PUT
+    };
+    Templates.routeTemplateSetWidgetPositioningOptions = {
+        route: "/templates/{id}/setWidgetPositioningOptions/{subid}",
+        method: RequestTypes.POST
+    };
+    Templates.routeTemplateSeMainImage = {
+        route: "/templates/{id}/uploadTemplateImage",
+        method: RequestTypes.POST
+    };
+    Templates.routeTemplateSetWatermarkImage = {
+        route: "/templates/{id}/uploadTemplateWatermarkImage",
+        method: RequestTypes.POST
+    };
+    Templates.routeTemplateSetOverlayImage = {
+        route: "/templates/{id}/uploadTemplateOverlayImage",
+        method: RequestTypes.POST
+    };
+    Templates.routeTemplateSetBackgroundImage = {
+        route: "/templates/{id}/setBackgroundImage",
+        method: RequestTypes.POST
     };
     return Templates;
 }());
