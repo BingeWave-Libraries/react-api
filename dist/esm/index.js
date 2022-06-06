@@ -329,6 +329,62 @@ var Templates = /** @class */ (function () {
     return Templates;
 }());
 
+var Widgets = /** @class */ (function () {
+    function Widgets() {
+    }
+    Widgets.createWidget = function (data, query, options) {
+        return Requests.post(this.routeCreateWidget.route, data, query, options);
+    };
+    Widgets.viewWidget = function (widget_id, query, options) {
+        var route = this.routeViewWidget.route.replaceAll('{id}', widget_id);
+        return Requests.get(route, query, options);
+    };
+    Widgets.getWidgets = function (query, options) {
+        return Requests.get(this.routeListWidget.route, query, options);
+    };
+    Widgets.updateWidget = function (widget_id, data, query, options) {
+        var route = this.routeUpdateWidget.route.replaceAll('{id}', widget_id);
+        return Requests.put(route, data, query, options);
+    };
+    Widgets.deleteWidget = function (widget_id, data, query, options) {
+        var route = this.routeDeleteWidget.route.replaceAll('{id}', widget_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Widgets.routeCreateWidget = {
+        route: "/widgets",
+        method: RequestTypes.POST
+    };
+    Widgets.routeListWidget = {
+        route: "/widgets",
+        method: RequestTypes.GET
+    };
+    Widgets.routeUpdateWidget = {
+        route: "/widgets/{id}",
+        method: RequestTypes.PUT
+    };
+    Widgets.routeViewWidget = {
+        route: "/widgets/{id}",
+        method: RequestTypes.GET
+    };
+    Widgets.routeDeleteWidget = {
+        route: "/widgets/{id}",
+        method: RequestTypes.DELETE
+    };
+    Widgets.routeSetMainImage = {
+        route: "/widgets/{id}/setMainImage",
+        method: RequestTypes.DELETE
+    };
+    Widgets.routeSetRemoveImage = {
+        route: "/widgets/{id}/removeMainImage",
+        method: RequestTypes.DELETE
+    };
+    Widgets.routesetRemoveImage = {
+        route: "/widgets/{id}/removeMainImage",
+        method: RequestTypes.DELETE
+    };
+    return Widgets;
+}());
+
 var BWAPI = /** @class */ (function () {
     function BWAPI() {
     }
@@ -337,6 +393,7 @@ var BWAPI = /** @class */ (function () {
     BWAPI.Events = Events;
     BWAPI.Organizers = Organizers;
     BWAPI.Templates = Templates;
+    BWAPI.Widgets = Widgets;
     return BWAPI;
 }());
 

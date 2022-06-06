@@ -24,5 +24,6 @@ export {Config};
 export {Events};
 export {Organizers};
 export {Templates};
+export {Widgets};
 
 export {BWAPI};
