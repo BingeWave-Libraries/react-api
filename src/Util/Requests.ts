@@ -16,7 +16,7 @@ class Requests {
         return this._sendRequest(url, RequestTypes.GET, null, query, options);
     }
 
-    public static delete = (url :string, data : object, query? : object | null, options? : object | null) => {
+    public static delete = (url :string, data? : object | null, query? : object | null, options? : object | null) => {
         return this._sendRequest(url, RequestTypes.DELETE, data, query, options);
     }
 
