@@ -79,6 +79,43 @@ class Templates {
         method : RequestTypes.POST
     };
 
+    private static routeListWidgets: Route = { 
+        route : "/templates/{id}/getWidgets",
+        method : RequestTypes.DELETE
+    };
+
+    private static routeAddWidget: Route = { 
+        route : "/templates/{id}/addWidget",
+        method : RequestTypes.DELETE
+    };
+
+    private static routeUpdateWidget: Route = { 
+        route : "/templates/{id}/updateWidget/{subid}",
+        method : RequestTypes.POST
+    };
+
+    private static routeRemoveWidget: Route = { 
+        route : "/templates/{id}/removeWidget",
+        method : RequestTypes.DELETE
+    };
+
+    private static routeSetOptionsWidget: Route = { 
+        route : "/templates/{id}/setWidgetPositioningOptions/{subid}",
+        method : RequestTypes.POST
+    };
+
+    private static routeGetOptionsWidget: Route = { 
+        route : "/templates/{id}/getWidgetPositioningOptions",
+        method : RequestTypes.GET
+    };
+
+    private static routeSaveEventToTemplatt: Route = { 
+        route : "/templates/{id}/saveEventToTemplate",
+        method : RequestTypes.POST
+    };
+
+
+
 
     public static getTemplates(query? : object | null, options? : object | null) {
         return Requests.get(this.routeListTemplate.route, query);
@@ -108,23 +145,46 @@ class Templates {
         return Requests.delete(route, data, query, options);
     }
 
-    public static addWidgetToTemplate(template_id : string, data : object, query? : object | null, options? : object | null) {
-        let route = this.routeTemplateAddWidget.route.replaceAll('{id}', template_id);
+    public static getWidgets(event_id : string, query? : object | null, options? : object | null) {
+        let route = this.routeListWidgets.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    }
+
+    public static addWidget(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeAddWidget.route.replaceAll('{id}', event_id);
         return Requests.post(route, data, query, options);
     }
 
-    public static updateAssociatedWidget(template_id : string, widget_id : string, data : object, query? : object | null, options? : object | null) {
-        let route = this.routeTemplateUpdateWidget.route.replaceAll('{id}', template_id);
+    public static updateWidget(event_id : string, widget_id : string,  data : object, query? : object | null, options? : object | null) {
+        let route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
 
-        return Requests.put(route, data, query, options);
+        return Requests.post(route, data, query, options);
     }
 
-    public static setWidgetPositioningOptions(template_id : string, widget_id : string, data : object, query? : object | null, options? : object | null) {
-        let route = this.routeTemplateSetWidgetPositioningOptions.route.replaceAll('{id}', template_id);
+    public static deleteWidget(event_id : string, widget_id : string,  data : object, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
 
-        return Requests.put(route, data, query, options);
+        return Requests.delete(route, data, query, options);
+    }
+
+    public static setWidgetPositioningOption(event_id : string, option_id : string,  data : object, query? : object | null, options? : object | null) {
+        let route = this.routeSetOptionsWidget.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', option_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static getWidgetPositioningOption(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeGetOptionsWidget.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+
+    public static saveEventToTemplat(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
     }
 
 }

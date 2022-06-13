@@ -143,6 +143,56 @@ var Events = /** @class */ (function () {
         var route = this.routeDeleteEvent.route.replaceAll('{id}', event_id);
         return Requests.delete(route, data, query, options);
     };
+    Events.getChatMessages = function (event_id, query, options) {
+        var route = this.routeGetMessagesEvent.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.getSingleChatMessage = function (event_id, message_id, query, options) {
+        var route = this.routeGetMessagesEvent.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+        return Requests.get(route, query, options);
+    };
+    Events.sendChatMessage = function (event_id, data, query, options) {
+        var route = this.routeSendMessageEvent.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.updateChatMessage = function (event_id, message_id, data, query, options) {
+        var route = this.routeUpdateMessagesEvent.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+        return Requests.put(route, data, query, options);
+    };
+    Events.deleteChatMessage = function (event_id, message_id, data, query, options) {
+        var route = this.routeDeleteMessagesEvent.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.getWidgets = function (event_id, query, options) {
+        var route = this.routeListWidgets.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.addWidget = function (event_id, data, query, options) {
+        var route = this.routeAddWidget.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.updateWidget = function (event_id, widget_id, data, query, options) {
+        var route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', widget_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.deleteWidget = function (event_id, widget_id, data, query, options) {
+        var route = this.routeRemoveWidget.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', widget_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.setWidgetPositioningOption = function (event_id, option_id, data, query, options) {
+        var route = this.routeSetOptionsWidget.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', option_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.getWidgetPositioningOption = function (event_id, query, options) {
+        var route = this.routeGetOptionsWidget.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
     Events.routeCreateEvent = {
         route: "/events",
         method: RequestTypes.POST
@@ -152,11 +202,11 @@ var Events = /** @class */ (function () {
         method: RequestTypes.GET
     };
     Events.routeUpdateEvent = {
-        route: "/events/{id}/design",
+        route: "/events/{id}",
         method: RequestTypes.PUT
     };
     Events.routeUpdateEventDesign = {
-        route: "/events/{id}",
+        route: "/events/{id}/design",
         method: RequestTypes.PUT
     };
     Events.routeViewEvent = {
@@ -166,6 +216,94 @@ var Events = /** @class */ (function () {
     Events.routeDeleteEvent = {
         route: "/events/{id}",
         method: RequestTypes.DELETE
+    };
+    Events.routeGetMessagesEvent = {
+        route: "/events/{id}/messages",
+        method: RequestTypes.GET
+    };
+    Events.routeSendMessageEvent = {
+        route: "/events/{id}/messages",
+        method: RequestTypes.POST
+    };
+    Events.routeViewMessagesEvent = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.GET
+    };
+    Events.routeUpdateMessagesEvent = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.PUT
+    };
+    Events.routeDeleteMessagesEvent = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStartStream = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStopStream = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeCancelEvent = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeSetState = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeGetState = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeIncrementStateBy = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeDecrementStateBy = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStartBroadcasting = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStopBroadcasting = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStartRecording = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeStopRecording = {
+        route: "/events/{id}/messages/{subid}",
+        method: RequestTypes.DELETE
+    };
+    Events.routeListWidgets = {
+        route: "/events/{id}/getWidgets",
+        method: RequestTypes.DELETE
+    };
+    Events.routeAddWidget = {
+        route: "/events/{id}/addWidget",
+        method: RequestTypes.DELETE
+    };
+    Events.routeUpdateWidget = {
+        route: "/events/{id}/updateWidget/{subid}",
+        method: RequestTypes.POST
+    };
+    Events.routeRemoveWidget = {
+        route: "/events/{id}/removeWidget",
+        method: RequestTypes.DELETE
+    };
+    Events.routeSetOptionsWidget = {
+        route: "/events/{id}/setWidgetPositioningOptions/{subid}",
+        method: RequestTypes.POST
+    };
+    Events.routeGetOptionsWidget = {
+        route: "/events/{id}/getWidgetPositioningOptions",
+        method: RequestTypes.GET
     };
     return Events;
 }());
@@ -252,19 +390,36 @@ var Templates = /** @class */ (function () {
         var route = this.routeDeleteTemplate.route.replaceAll('{id}', template_id);
         return Requests.delete(route, data, query, options);
     };
-    Templates.addWidgetToTemplate = function (template_id, data, query, options) {
-        var route = this.routeTemplateAddWidget.route.replaceAll('{id}', template_id);
+    Templates.getWidgets = function (event_id, query, options) {
+        var route = this.routeListWidgets.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Templates.addWidget = function (event_id, data, query, options) {
+        var route = this.routeAddWidget.route.replaceAll('{id}', event_id);
         return Requests.post(route, data, query, options);
     };
-    Templates.updateAssociatedWidget = function (template_id, widget_id, data, query, options) {
-        var route = this.routeTemplateUpdateWidget.route.replaceAll('{id}', template_id);
+    Templates.updateWidget = function (event_id, widget_id, data, query, options) {
+        var route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.put(route, data, query, options);
+        return Requests.post(route, data, query, options);
     };
-    Templates.setWidgetPositioningOptions = function (template_id, widget_id, data, query, options) {
-        var route = this.routeTemplateSetWidgetPositioningOptions.route.replaceAll('{id}', template_id);
+    Templates.deleteWidget = function (event_id, widget_id, data, query, options) {
+        var route = this.routeRemoveWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.put(route, data, query, options);
+        return Requests.delete(route, data, query, options);
+    };
+    Templates.setWidgetPositioningOption = function (event_id, option_id, data, query, options) {
+        var route = this.routeSetOptionsWidget.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', option_id);
+        return Requests.post(route, data, query, options);
+    };
+    Templates.getWidgetPositioningOption = function (event_id, query, options) {
+        var route = this.routeGetOptionsWidget.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Templates.saveEventToTemplat = function (event_id, data, query, options) {
+        var route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
     };
     Templates.routeCreateTemplate = {
         route: "/templates",
@@ -324,6 +479,34 @@ var Templates = /** @class */ (function () {
     };
     Templates.routeTemplateSetBackgroundImage = {
         route: "/templates/{id}/setBackgroundImage",
+        method: RequestTypes.POST
+    };
+    Templates.routeListWidgets = {
+        route: "/templates/{id}/getWidgets",
+        method: RequestTypes.DELETE
+    };
+    Templates.routeAddWidget = {
+        route: "/templates/{id}/addWidget",
+        method: RequestTypes.DELETE
+    };
+    Templates.routeUpdateWidget = {
+        route: "/templates/{id}/updateWidget/{subid}",
+        method: RequestTypes.POST
+    };
+    Templates.routeRemoveWidget = {
+        route: "/templates/{id}/removeWidget",
+        method: RequestTypes.DELETE
+    };
+    Templates.routeSetOptionsWidget = {
+        route: "/templates/{id}/setWidgetPositioningOptions/{subid}",
+        method: RequestTypes.POST
+    };
+    Templates.routeGetOptionsWidget = {
+        route: "/templates/{id}/getWidgetPositioningOptions",
+        method: RequestTypes.GET
+    };
+    Templates.routeSaveEventToTemplatt = {
+        route: "/templates/{id}/saveEventToTemplate",
         method: RequestTypes.POST
     };
     return Templates;
@@ -397,5 +580,5 @@ var BWAPI = /** @class */ (function () {
     return BWAPI;
 }());
 
-export { Auth, BWAPI, Config, Events, Organizers, Templates };
+export { Auth, BWAPI, Config, Events, Organizers, Templates, Widgets };
 //# sourceMappingURL=index.js.map

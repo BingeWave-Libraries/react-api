@@ -15,12 +15,45 @@ declare class Events {
     private static routeUpdateEventDesign;
     private static routeViewEvent;
     private static routeDeleteEvent;
+    private static routeGetMessagesEvent;
+    private static routeSendMessageEvent;
+    private static routeViewMessagesEvent;
+    private static routeUpdateMessagesEvent;
+    private static routeDeleteMessagesEvent;
+    private static routeStartStream;
+    private static routeStopStream;
+    private static routeCancelEvent;
+    private static routeSetState;
+    private static routeGetState;
+    private static routeIncrementStateBy;
+    private static routeDecrementStateBy;
+    private static routeStartBroadcasting;
+    private static routeStopBroadcasting;
+    private static routeStartRecording;
+    private static routeStopRecording;
+    private static routeListWidgets;
+    private static routeAddWidget;
+    private static routeUpdateWidget;
+    private static routeRemoveWidget;
+    private static routeSetOptionsWidget;
+    private static routeGetOptionsWidget;
     static createEvent(data: object, query?: object | null, options?: object | null): Promise<any>;
     static viewEvent(event_id: string, query?: object | null, options?: object | null): Promise<any>;
     static getEvents(query?: object | null, options?: object | null): Promise<any>;
     static updateEvent(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static updateEventDesign(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static deleteEvent(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getChatMessages(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static getSingleChatMessage(event_id: string, message_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static sendChatMessage(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static updateChatMessage(event_id: string, message_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static deleteChatMessage(event_id: string, message_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgets(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static addWidget(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static updateWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static deleteWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setWidgetPositioningOption(event_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgetPositioningOption(event_id: string, query?: object | null, options?: object | null): Promise<any>;
 }
 
 declare class Config {
@@ -61,15 +94,26 @@ declare class Templates {
     private static routeTemplateSetWatermarkImage;
     private static routeTemplateSetOverlayImage;
     private static routeTemplateSetBackgroundImage;
+    private static routeListWidgets;
+    private static routeAddWidget;
+    private static routeUpdateWidget;
+    private static routeRemoveWidget;
+    private static routeSetOptionsWidget;
+    private static routeGetOptionsWidget;
+    private static routeSaveEventToTemplatt;
     static getTemplates(query?: object | null, options?: object | null): Promise<any>;
     static createTemplate(data: object, query?: object | null, options?: object | null): Promise<any>;
     static viewTemplate(template_id: string, query?: object | null, options?: object | null): Promise<any>;
     static updateTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static updateTemplateDesign(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static deleteTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static addWidgetToTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static updateAssociatedWidget(template_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static setWidgetPositioningOptions(template_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgets(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static addWidget(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static updateWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static deleteWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setWidgetPositioningOption(event_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgetPositioningOption(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static saveEventToTemplat(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 
 declare class Widgets {
@@ -97,4 +141,4 @@ declare class BWAPI {
     static Widgets: Widgets;
 }
 
-export { Auth, BWAPI, Config, Events, Organizers, Templates };
+export { Auth, BWAPI, Config, Events, Organizers, Templates, Widgets };
