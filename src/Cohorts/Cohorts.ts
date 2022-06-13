@@ -14,11 +14,7 @@ class Cohorts {
         route: "/cohorts",
         method: RequestTypes.POST
     }
-
-    private static routeViewCohort: Route = { 
-        route : "/cohorts/{id}",
-        method : RequestTypes.GET
-    };
+;
 
     public static routeUpdateCohort : Route = {
         route: "/cohorts/{id}",
@@ -63,15 +59,6 @@ class Cohorts {
     public static createCohort(data : object, query? : object | null, options? : object | null){
 
         return Requests.post(this.routeCreateCohort.route, data, query, options);
-    }
-
-    public static viewCohort(cohort_id : string, query? : object | null, options? : object | null) {
-        let route = this.routeViewCohort.route.replaceAll('{id}', cohort_id);
-        return Requests.get(route, query, options);
-    }
-
-    public static getCohort(query? : object | null, options? : object | null) {
-        return Requests.get(this.routeViewCohort.route, query, options);
     }
 
     public static updateCohort(cohort_id: string, data: object, query?: object | null, options?: object | null){
