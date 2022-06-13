@@ -30,6 +30,31 @@ class Cohorts {
         method : RequestTypes.DELETE
     };
 
+    private static routeAddAccount: Route = {
+        route : "/cohorts/{id}/addAccount",
+        method : RequestTypes.POST
+    }
+
+    public static routeRemoveAccount : Route = {
+        route : "cohorts/{id}/removeAccount",
+        method : RequestTypes.POST
+    }
+
+    private static routeAddEvent : Route = {
+        route : "cohorts/{id}/addEvent",
+        method : RequestTypes.POST
+    }
+
+    private static routeRemoveEvent : Route = {
+        route : "cohorts/{id}",
+        method : RequestTypes.PUT
+    }
+
+    private static routeSetMainImage : Route = {
+        route : "cohorts/{id}/setMainImage",
+        method : RequestTypes.POST
+    }
+
     public static ListCohort(data : object, query? : object | null, options? : object | null){
 
         return Requests.post(this.routeListCohort.route, data, query, options);
@@ -58,6 +83,7 @@ class Cohorts {
         let route = this.routeDeleteCohort.route.replaceAll('{id}', cohort_id);
         return Requests.delete(route, data, query, options);
     }
+
 
 }
 
