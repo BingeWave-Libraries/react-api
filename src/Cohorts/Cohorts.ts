@@ -60,3 +60,5 @@ class Cohorts {
     }
 
 }
+
+export default Cohorts;
