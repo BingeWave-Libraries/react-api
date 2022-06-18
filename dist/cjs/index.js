@@ -315,6 +315,9 @@ var Events = /** @class */ (function () {
 var Organizers = /** @class */ (function () {
     function Organizers() {
     }
+    Organizers.getOrganizers = function (query, options) {
+        return Requests.get(this.routeListOrganizers.route, query);
+    };
     Organizers.createOrganizer = function (data, query, options) {
         return Requests.post(this.routeCreateOrganizer.route, data, query, options);
     };
