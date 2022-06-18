@@ -39,6 +39,10 @@ class Organizers {
         method : RequestTypes.POST
     };
 
+    public static getOrganizers(query? : object | null, options? : object | null) {
+        return Requests.get(this.routeListOrganizers.route, query);
+    }
+
     public static createOrganizer(data : object, query? : object | null, options? : object | null) {
         return Requests.post(this.routeCreateOrganizer.route, data, query, options);
     }
