@@ -29,6 +29,16 @@ class Videos {
         method : RequestTypes.DELETE
     };
 
+    private static routeMainVideo : Route = {
+        route : "/videos/{id}/setMainVideoFile",
+        method : RequestTypes.POST
+    }
+
+    private static routePreviewVideo : Route = {
+        route : "/videos/{id}/setPreviewVideoFile",
+        method : RequestTypes.POST
+    }
+
     public static createVideo(data : object, query? : object | null, options? : object | null){
 
         return Requests.post(this.routeCreateVideo.route, data, query, options);
@@ -58,6 +68,15 @@ class Videos {
         return Requests.delete(route, data, query, options);
     }
 
+    public static uploadMainVideo(video_id : string, data : object, query? : object | null, options? : object | null){
+        let route = this.routeMainVideo.route.replaceAll('{id}', video_id)
+        return Requests.post(route, data, query, options);
+    }
+    
+    public static setPreviewVideo(preview_id : string, data : object, query? : object | null, options? : object | null){
+        let route = this.routePreviewVideo.route.replaceAll('{id}', preview_id)
+        return Requests.post(route, data, query, options);
+    }
 }
 
 export default Videos;
