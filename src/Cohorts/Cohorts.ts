@@ -97,7 +97,7 @@ class Cohorts {
     public static setImage(image_url : string, data: object, query? : object | null, options? : object | null){
         let route = this.routeSetMainImage.route.replaceAll('{id}', image_url)
 
-        return Requests.post(this.routeRemoveEvent.route, data, query, options);
+        return Requests.post(this.routeSetMainImage.route, data, query, options);
     }
 
 }
