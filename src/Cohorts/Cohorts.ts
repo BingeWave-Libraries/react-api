@@ -51,6 +51,7 @@ class Cohorts {
         method : RequestTypes.POST
     }
 
+
     public static ListCohort(data : object, query? : object | null, options? : object | null){
 
         return Requests.post(this.routeListCohort.route, data, query, options);
@@ -71,6 +72,33 @@ class Cohorts {
         return Requests.delete(route, data, query, options);
     }
 
+    public static addAccount(data: object, query? : object | null, options? : object | null){
+
+        return Requests.post(this.routeAddAccount.route, data, query, options);
+    }
+
+    public static removeAccount(account_id : string, data: object, query? : object | null, options? : object | null){
+        let route = this.routeRemoveAccount.route.replaceAll('{id}', account_id)
+
+        return Requests.post(this.routeRemoveAccount.route, data, query, options);
+    }
+
+    public static addEvent(data: object, query? : object | null, options? : object | null){
+
+        return Requests.post(this.routeAddEvent.route, data, query, options);
+    }
+
+    public static removeEvent(event_id : string, data: object, query? : object | null, options? : object | null){
+        let route = this.routeRemoveEvent.route.replaceAll('{id}', event_id)
+
+        return Requests.post(this.routeRemoveEvent.route, data, query, options);
+    }
+
+    public static setImage(image_url : string, data: object, query? : object | null, options? : object | null){
+        let route = this.routeSetMainImage.route.replaceAll('{id}', image_url)
+
+        return Requests.post(this.routeRemoveEvent.route, data, query, options);
+    }
 
 }
 
