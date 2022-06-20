@@ -39,6 +39,11 @@ class Videos {
         method : RequestTypes.POST
     }
 
+    private static routeSetMainImage : Route = {
+        route : "videos/{id}/setMainImage",
+        method : RequestTypes.POST
+    }
+
     public static createVideo(data : object, query? : object | null, options? : object | null){
 
         return Requests.post(this.routeCreateVideo.route, data, query, options);
@@ -77,6 +82,13 @@ class Videos {
         let route = this.routePreviewVideo.route.replaceAll('{id}', preview_id)
         return Requests.post(route, data, query, options);
     }
+
+    public static setImage(file : string, data: object, query? : object | null, options? : object | null){
+        let route = this.routeSetMainImage.route.replaceAll('{id}', file)
+
+        return Requests.post(this.routeSetMainImage.route, data, query, options);
+    }
+
 }
 
 export default Videos;
