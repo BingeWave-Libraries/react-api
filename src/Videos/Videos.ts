@@ -34,6 +34,11 @@ class Videos {
         method : RequestTypes.POST
     }
 
+    private static routeUploadMainVideo : Route = {
+        route : "/videos/{id}/setMainVideoFile",
+        method : RequestTypes.POST
+    }
+
     private static routePreviewVideo : Route = {
         route : "/videos/{id}/setPreviewVideoFile",
         method : RequestTypes.POST
@@ -73,8 +78,8 @@ class Videos {
         return Requests.delete(route, data, query, options);
     }
 
-    public static uploadMainVideo(video_id : string, data : object, query? : object | null, options? : object | null){
-        let route = this.routeMainVideo.route.replaceAll('{id}', video_id)
+    public static uploadMainVideo(video_id : string,data : object, query? : object | null, options? : object | null){
+        let route = this.routeUploadMainVideo.route.replaceAll('{id}', video_id)
         return Requests.post(route, data, query, options);
     }
     
