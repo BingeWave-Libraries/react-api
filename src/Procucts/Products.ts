@@ -59,17 +59,17 @@ class Products{
 	return Requests.put(route, data, query, options);
     }
 
-   /* public static uploadImage = (image: string, file: any, url :string, data : AnyObject, query? : object | null, options? : object | null) => {
+    public static uploadImage(image_id: string, file: any, url :string, data : AnyObject, query? : object | null, options? : object | null){
+        let route = this.routeAddImage.route.replaceAll('{id}', image_id)
+        return Requests.post(route, data, query, options);
+    }
 
-        const formData = new FormData();
+    public static defaultImage(){}
 
-        formData.append(image, file)
-
-        image.keys(data).forEach(key => formData.append(key, data[key]));
-  
-        return this.routeAddImage(url, RequestTypes.POST, formData, query, options);
-    }*/
-
+    public static deleteImage(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeDeleteImage.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
+    }
 
 
 }
