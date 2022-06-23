@@ -61,10 +61,14 @@ class Products{
 
     public static uploadImage(image_id: string, file: any, url :string, data : AnyObject, query? : object | null, options? : object | null){
         let route = this.routeAddImage.route.replaceAll('{id}', image_id)
-        return Requests.post(route, data, query, options);
+        return Requests.upload(image_id, route, data, query, options);
     }
 
-    public static defaultImage(){}
+    public static defaultImage(image_id : string, data: object, query? : object | null, options? : object | null){
+        let route = this.routeDefaultImage.route.replaceAll('{id}', image_id)
+
+        return Requests.post(this.routeDefaultImage.route, data, query, options);
+    }
 
     public static deleteImage(event_id : string, data : object, query? : object | null, options? : object | null) {
         let route = this.routeDeleteImage.route.replaceAll('{id}', event_id);
