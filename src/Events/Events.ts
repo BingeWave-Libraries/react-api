@@ -130,7 +130,7 @@ class Events {
     };
 
     private static routeRemoveWidget: Route = { 
-        route : "/events/{id}/removeWidget",
+        route : "/events/{id}/removeWidget/{subid}",
         method : RequestTypes.DELETE
     };
 
