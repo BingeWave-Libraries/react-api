@@ -298,7 +298,7 @@ var Events = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Events.routeRemoveWidget = {
-        route: "/events/{id}/removeWidget",
+        route: "/events/{id}/removeWidget/{subid}",
         method: RequestTypes.DELETE
     };
     Events.routeSetOptionsWidget = {
@@ -397,35 +397,35 @@ var Templates = /** @class */ (function () {
         var route = this.routeDeleteTemplate.route.replaceAll('{id}', template_id);
         return Requests.delete(route, data, query, options);
     };
-    Templates.getWidgets = function (event_id, query, options) {
-        var route = this.routeListWidgets.route.replaceAll('{id}', event_id);
+    Templates.getWidgets = function (template_id, query, options) {
+        var route = this.routeListWidgets.route.replaceAll('{id}', template_id);
         return Requests.get(route, query, options);
     };
-    Templates.addWidget = function (event_id, data, query, options) {
-        var route = this.routeAddWidget.route.replaceAll('{id}', event_id);
+    Templates.addWidget = function (template_id, data, query, options) {
+        var route = this.routeAddWidget.route.replaceAll('{id}', template_id);
         return Requests.post(route, data, query, options);
     };
-    Templates.updateWidget = function (event_id, widget_id, data, query, options) {
-        var route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
+    Templates.updateWidget = function (template_id, widget_id, data, query, options) {
+        var route = this.routeUpdateWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
         return Requests.post(route, data, query, options);
     };
-    Templates.deleteWidget = function (event_id, widget_id, data, query, options) {
-        var route = this.routeRemoveWidget.route.replaceAll('{id}', event_id);
+    Templates.deleteWidget = function (template_id, widget_id, data, query, options) {
+        var route = this.routeRemoveWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
         return Requests.delete(route, data, query, options);
     };
-    Templates.setWidgetPositioningOption = function (event_id, option_id, data, query, options) {
-        var route = this.routeSetOptionsWidget.route.replaceAll('{id}', event_id);
+    Templates.setWidgetPositioningOption = function (template_id, option_id, data, query, options) {
+        var route = this.routeSetOptionsWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', option_id);
         return Requests.post(route, data, query, options);
     };
-    Templates.getWidgetPositioningOption = function (event_id, query, options) {
-        var route = this.routeGetOptionsWidget.route.replaceAll('{id}', event_id);
+    Templates.getWidgetPositioningOption = function (template_id, query, options) {
+        var route = this.routeGetOptionsWidget.route.replaceAll('{id}', template_id);
         return Requests.get(route, query, options);
     };
-    Templates.saveEventToTemplat = function (event_id, data, query, options) {
-        var route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', event_id);
+    Templates.saveEventToTemplat = function (template_id, data, query, options) {
+        var route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', template_id);
         return Requests.post(route, data, query, options);
     };
     Templates.routeCreateTemplate = {
@@ -575,6 +575,140 @@ var Widgets = /** @class */ (function () {
     return Widgets;
 }());
 
+var Videos = /** @class */ (function () {
+    function Videos() {
+    }
+    Videos.createVideo = function (data, query, options) {
+        return Requests.post(this.routeCreateVideo.route, data, query, options);
+    };
+    Videos.updateVideo = function (video_id, data, query, options) {
+        var route = this.routeUpdateVideo.route.replaceAll('{id}', video_id);
+        return Requests.put(route, data, query, options);
+    };
+    Videos.listVideos = function (data, query, options) {
+        return Requests.post(this.routeListVideo.route, data, query, options);
+    };
+    Videos.viewVideo = function (video_id, query, options) {
+        var route = this.routeViewVideo.route.replaceAll('{id}', video_id);
+        return Requests.get(route, query, options);
+    };
+    Videos.deleteVideo = function (video_id, data, query, options) {
+        var route = this.routeDeleteVideo.route.replaceAll('{id}', video_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Videos.uploadMainVideo = function (filename, file, video_id, data, query, options) {
+        var route = this.routeUploadMainVideo.route.replaceAll('{id}', video_id);
+        return Requests.upload(filename, file, route, data, query, options);
+    };
+    Videos.uploadPreviewVideo = function (video_id, filename, file, data, query, options) {
+        var route = this.routePreviewVideo.route.replaceAll('{id}', video_id);
+        return Requests.upload(filename, file, route, data, query, options);
+    };
+    Videos.uploadImage = function (video_id, filename, file, data, query, options) {
+        var route = this.routeSetMainImage.route.replaceAll('{id}', video_id);
+        return Requests.upload(filename, file, route, data, query, options);
+    };
+    Videos.routeCreateVideo = {
+        route: "/videos",
+        method: RequestTypes.POST
+    };
+    Videos.routeUpdateVideo = {
+        route: "/videos/{id}",
+        method: RequestTypes.PUT
+    };
+    Videos.routeListVideo = {
+        route: "/videos",
+        method: RequestTypes.POST
+    };
+    Videos.routeViewVideo = {
+        route: "/videos/{id}",
+        method: RequestTypes.GET
+    };
+    Videos.routeDeleteVideo = {
+        route: "/videos/{id}",
+        method: RequestTypes.DELETE
+    };
+    Videos.routeMainVideo = {
+        route: "/videos/{id}/setMainVideoFile",
+        method: RequestTypes.POST
+    };
+    Videos.routeUploadMainVideo = {
+        route: "/videos/{id}/setMainVideoFile",
+        method: RequestTypes.POST
+    };
+    Videos.routePreviewVideo = {
+        route: "/videos/{id}/setPreviewVideoFile",
+        method: RequestTypes.POST
+    };
+    Videos.routeSetMainImage = {
+        route: "videos/{id}/setMainImage",
+        method: RequestTypes.POST
+    };
+    return Videos;
+}());
+
+var Products = /** @class */ (function () {
+    function Products() {
+    }
+    Products.listProducts = function (data, query, options) {
+        return Requests.post(this.routeListProducts.route, data, query, options);
+    };
+    Products.createProducts = function (data, query, options) {
+        return Requests.post(this.routeCreateProducts.route, data, query, options);
+    };
+    Products.viewProducts = function (product_id, query, options) {
+        var route = this.routeViewProducts.route.replaceAll('{id}', product_id);
+        return Requests.get(route, query, options);
+    };
+    Products.updateProducts = function (product_id, data, query, options) {
+        var route = this.routeUpdateProducts.route.replaceAll('{id}', product_id);
+        return Requests.put(route, data, query, options);
+    };
+    Products.uploadImage = function (product_id, file, filename, data, query, options) {
+        var route = this.routeAddImage.route.replaceAll('{id}', product_id);
+        return Requests.upload(filename, file, route, data, query, options);
+    };
+    Products.defaultImage = function (product_id, image_id, data, query, options) {
+        var route = this.routeDefaultImage.route.replaceAll('{id}', product_id);
+        route = this.routeDefaultImage.route.replaceAll('{subid}', image_id);
+        return Requests.post(route, data, query, options);
+    };
+    Products.deleteImage = function (product_id, image_id, data, query, options) {
+        var route = this.routeDeleteImage.route.replaceAll('{id}', product_id);
+        route = this.routeDefaultImage.route.replaceAll('{subid}', image_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Products.routeListProducts = {
+        route: "/products",
+        method: RequestTypes.GET
+    };
+    Products.routeCreateProducts = {
+        route: "/products",
+        method: RequestTypes.POST
+    };
+    Products.routeViewProducts = {
+        route: "/products/{id}",
+        method: RequestTypes.GET
+    };
+    Products.routeUpdateProducts = {
+        route: "/products/{id}",
+        method: RequestTypes.PUT
+    };
+    Products.routeAddImage = {
+        route: "/products/{id}/images",
+        method: RequestTypes.POST
+    };
+    Products.routeDefaultImage = {
+        route: "/products/{id}/images/{subid}/makeDefault",
+        method: RequestTypes.POST
+    };
+    Products.routeDeleteImage = {
+        route: "/products/{id}/images/{subid}",
+        method: RequestTypes.DELETE
+    };
+    return Products;
+}());
+
 var BWAPI = /** @class */ (function () {
     function BWAPI() {
     }
@@ -582,8 +716,10 @@ var BWAPI = /** @class */ (function () {
     BWAPI.Config = Config;
     BWAPI.Events = Events;
     BWAPI.Organizers = Organizers;
+    BWAPI.Products = Products;
     BWAPI.Templates = Templates;
     BWAPI.Widgets = Widgets;
+    BWAPI.Videos = Videos;
     return BWAPI;
 }());
 
@@ -592,6 +728,8 @@ exports.BWAPI = BWAPI;
 exports.Config = Config;
 exports.Events = Events;
 exports.Organizers = Organizers;
+exports.Products = Products;
 exports.Templates = Templates;
+exports.Videos = Videos;
 exports.Widgets = Widgets;
 //# sourceMappingURL=index.js.map

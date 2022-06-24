@@ -27,12 +27,12 @@ declare class Templates {
     static updateTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static updateTemplateDesign(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static deleteTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static getWidgets(event_id: string, query?: object | null, options?: object | null): Promise<any>;
-    static addWidget(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static updateWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static deleteWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static setWidgetPositioningOption(event_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
-    static getWidgetPositioningOption(event_id: string, query?: object | null, options?: object | null): Promise<any>;
-    static saveEventToTemplat(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgets(template_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static addWidget(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static updateWidget(template_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static deleteWidget(template_id: string, widget_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static setWidgetPositioningOption(template_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getWidgetPositioningOption(template_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static saveEventToTemplat(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 export default Templates;
