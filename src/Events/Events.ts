@@ -219,7 +219,7 @@ class Events {
         let route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
 
-        return Requests.post(route, data, query, options);
+        return Requests.put(route, data, query, options);
     }
 
     public static deleteWidget(event_id : string, widget_id : string,  data : object, query? : object | null, options? : object | null) {

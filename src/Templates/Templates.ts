@@ -159,7 +159,7 @@ class Templates {
         let route = this.routeUpdateWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
 
-        return Requests.post(route, data, query, options);
+        return Requests.put(route, data, query, options);
     }
 
     public static deleteWidget(template_id : string, widget_id : string,  data? : object | null, query? : object | null, options? : object | null) {
@@ -184,6 +184,7 @@ class Templates {
 
     public static saveEventToTemplate(template_id : string, data : object, query? : object | null, options? : object | null) {
         let route = this.routeSaveEventToTemplate.route.replaceAll('{id}', template_id);
+
         return Requests.post(route, data, query, options);
     }
 

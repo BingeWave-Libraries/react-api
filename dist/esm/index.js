@@ -177,7 +177,7 @@ var Events = /** @class */ (function () {
     Events.updateWidget = function (event_id, widget_id, data, query, options) {
         var route = this.routeUpdateWidget.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.post(route, data, query, options);
+        return Requests.put(route, data, query, options);
     };
     Events.deleteWidget = function (event_id, widget_id, data, query, options) {
         var route = this.routeRemoveWidget.route.replaceAll('{id}', event_id);
@@ -451,7 +451,7 @@ var Templates = /** @class */ (function () {
     Templates.updateWidget = function (template_id, widget_id, data, query, options) {
         var route = this.routeUpdateWidget.route.replaceAll('{id}', template_id);
         route = route.replaceAll('{subid}', widget_id);
-        return Requests.post(route, data, query, options);
+        return Requests.put(route, data, query, options);
     };
     Templates.deleteWidget = function (template_id, widget_id, data, query, options) {
         var route = this.routeRemoveWidget.route.replaceAll('{id}', template_id);
