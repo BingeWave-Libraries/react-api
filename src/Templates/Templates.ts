@@ -95,7 +95,7 @@ class Templates {
     };
 
     private static routeRemoveWidget: Route = { 
-        route : "/templates/{id}/removeWidget",
+        route : "/templates/{id}/removeWidget/{subid}",
         method : RequestTypes.DELETE
     };
 
@@ -109,7 +109,7 @@ class Templates {
         method : RequestTypes.GET
     };
 
-    private static routeSaveEventToTemplatt: Route = { 
+    private static routeSaveEventToTemplate: Route = { 
         route : "/templates/{id}/saveEventToTemplate",
         method : RequestTypes.POST
     };
@@ -182,8 +182,8 @@ class Templates {
         return Requests.get(route, query, options);
     }
 
-    public static saveEventToTemplat(template_id : string, data : object, query? : object | null, options? : object | null) {
-        let route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', template_id);
+    public static saveEventToTemplate(template_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeSaveEventToTemplate.route.replaceAll('{id}', template_id);
         return Requests.post(route, data, query, options);
     }
 

@@ -60,12 +60,12 @@ class Events {
     };
 
     private static routeStartStream: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/startStream",
         method : RequestTypes.DELETE
     };
 
     private static routeStopStream: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/stopStream",
         method : RequestTypes.DELETE
     };
 
@@ -75,42 +75,42 @@ class Events {
     };
 
     private static routeSetState: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/setState",
         method : RequestTypes.DELETE
     };
 
     private static routeGetState: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/getState/{key}",
         method : RequestTypes.DELETE
     };
 
     private static routeIncrementStateBy: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/incrementStateBy/{key}",
         method : RequestTypes.DELETE
     };
 
     private static routeDecrementStateBy: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/decrementStateBy/{key}",
         method : RequestTypes.DELETE
     };
 
     private static routeStartBroadcasting: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/startBroadcasting",
         method : RequestTypes.DELETE
     };
 
     private static routeStopBroadcasting: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/stopBroadcasting",
         method : RequestTypes.DELETE
     };
 
     private static routeStartRecording: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/startRecording",
         method : RequestTypes.DELETE
     };
 
     private static routeStopRecording: Route = { 
-        route : "/events/{id}/messages/{subid}",
+        route : "/events/{id}/stopRecording",
         method : RequestTypes.DELETE
     };
 
@@ -242,8 +242,75 @@ class Events {
         return Requests.get(route, query, options);
     }
     
-
     
+    public static startBroadcast(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStartBroadcasting.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static stopBroadcast(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStopBroadcasting.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static startRecording(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStartRecording.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static stopRecording(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStopRecording.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static startStreaming(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStartStream.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static stopStreaming(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeStopStream.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static cancelEvent(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeCancelEvent.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static setState(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeSetState.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static getState(event_id : string, key : any, query? : object | null, options? : object | null) {
+        let route = this.routeGetState.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+
+        return Requests.get(route, query, options);
+    }
+
+    public static incrementStateBy(event_id : string, key : any, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeIncrementStateBy.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static decrementStateBy(event_id : string, key : any, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeDecrementStateBy.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+
+        return Requests.post(route, data, query, options);
+    }
 
 }
 

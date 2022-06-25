@@ -44,5 +44,16 @@ declare class Events {
     static deleteWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static setWidgetPositioningOption(event_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static getWidgetPositioningOption(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static startBroadcast(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopBroadcast(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static startRecording(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopRecording(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static startStreaming(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopStreaming(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static cancelEvent(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setState(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getState(event_id: string, key: any, query?: object | null, options?: object | null): Promise<any>;
+    static incrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static decrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 export default Events;

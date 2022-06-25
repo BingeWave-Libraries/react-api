@@ -54,6 +54,17 @@ declare class Events {
     static deleteWidget(event_id: string, widget_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static setWidgetPositioningOption(event_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static getWidgetPositioningOption(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static startBroadcast(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopBroadcast(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static startRecording(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopRecording(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static startStreaming(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static stopStreaming(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static cancelEvent(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setState(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getState(event_id: string, key: any, query?: object | null, options?: object | null): Promise<any>;
+    static incrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static decrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 
 declare class Config {
@@ -101,7 +112,7 @@ declare class Templates {
     private static routeRemoveWidget;
     private static routeSetOptionsWidget;
     private static routeGetOptionsWidget;
-    private static routeSaveEventToTemplatt;
+    private static routeSaveEventToTemplate;
     static getTemplates(query?: object | null, options?: object | null): Promise<any>;
     static createTemplate(data: object, query?: object | null, options?: object | null): Promise<any>;
     static viewTemplate(template_id: string, query?: object | null, options?: object | null): Promise<any>;
@@ -114,7 +125,7 @@ declare class Templates {
     static deleteWidget(template_id: string, widget_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
     static setWidgetPositioningOption(template_id: string, option_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
     static getWidgetPositioningOption(template_id: string, query?: object | null, options?: object | null): Promise<any>;
-    static saveEventToTemplat(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static saveEventToTemplate(template_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 
 declare class Widgets {

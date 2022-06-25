@@ -197,6 +197,53 @@ var Events = /** @class */ (function () {
         var route = this.routeGetOptionsWidget.route.replaceAll('{id}', event_id);
         return Requests.get(route, query, options);
     };
+    Events.startBroadcast = function (event_id, data, query, options) {
+        var route = this.routeStartBroadcasting.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.stopBroadcast = function (event_id, data, query, options) {
+        var route = this.routeStopBroadcasting.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.startRecording = function (event_id, data, query, options) {
+        var route = this.routeStartRecording.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.stopRecording = function (event_id, data, query, options) {
+        var route = this.routeStopRecording.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.startStreaming = function (event_id, data, query, options) {
+        var route = this.routeStartStream.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.stopStreaming = function (event_id, data, query, options) {
+        var route = this.routeStopStream.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.cancelEvent = function (event_id, data, query, options) {
+        var route = this.routeCancelEvent.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.setState = function (event_id, data, query, options) {
+        var route = this.routeSetState.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.getState = function (event_id, key, query, options) {
+        var route = this.routeGetState.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+        return Requests.get(route, query, options);
+    };
+    Events.incrementStateBy = function (event_id, key, data, query, options) {
+        var route = this.routeIncrementStateBy.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+        return Requests.post(route, data, query, options);
+    };
+    Events.decrementStateBy = function (event_id, key, data, query, options) {
+        var route = this.routeDecrementStateBy.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{key}', key);
+        return Requests.post(route, data, query, options);
+    };
     Events.routeCreateEvent = {
         route: "/events",
         method: RequestTypes.POST
@@ -242,11 +289,11 @@ var Events = /** @class */ (function () {
         method: RequestTypes.DELETE
     };
     Events.routeStartStream = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/startStream",
         method: RequestTypes.DELETE
     };
     Events.routeStopStream = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/stopStream",
         method: RequestTypes.DELETE
     };
     Events.routeCancelEvent = {
@@ -254,35 +301,35 @@ var Events = /** @class */ (function () {
         method: RequestTypes.DELETE
     };
     Events.routeSetState = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/setState",
         method: RequestTypes.DELETE
     };
     Events.routeGetState = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/getState/{key}",
         method: RequestTypes.DELETE
     };
     Events.routeIncrementStateBy = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/incrementStateBy/{key}",
         method: RequestTypes.DELETE
     };
     Events.routeDecrementStateBy = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/decrementStateBy/{key}",
         method: RequestTypes.DELETE
     };
     Events.routeStartBroadcasting = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/startBroadcasting",
         method: RequestTypes.DELETE
     };
     Events.routeStopBroadcasting = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/stopBroadcasting",
         method: RequestTypes.DELETE
     };
     Events.routeStartRecording = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/startRecording",
         method: RequestTypes.DELETE
     };
     Events.routeStopRecording = {
-        route: "/events/{id}/messages/{subid}",
+        route: "/events/{id}/stopRecording",
         method: RequestTypes.DELETE
     };
     Events.routeListWidgets = {
@@ -424,8 +471,8 @@ var Templates = /** @class */ (function () {
         var route = this.routeGetOptionsWidget.route.replaceAll('{id}', template_id);
         return Requests.get(route, query, options);
     };
-    Templates.saveEventToTemplat = function (template_id, data, query, options) {
-        var route = this.routeSaveEventToTemplatt.route.replaceAll('{id}', template_id);
+    Templates.saveEventToTemplate = function (template_id, data, query, options) {
+        var route = this.routeSaveEventToTemplate.route.replaceAll('{id}', template_id);
         return Requests.post(route, data, query, options);
     };
     Templates.routeCreateTemplate = {
@@ -501,7 +548,7 @@ var Templates = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Templates.routeRemoveWidget = {
-        route: "/templates/{id}/removeWidget",
+        route: "/templates/{id}/removeWidget/{subid}",
         method: RequestTypes.DELETE
     };
     Templates.routeSetOptionsWidget = {
@@ -512,7 +559,7 @@ var Templates = /** @class */ (function () {
         route: "/templates/{id}/getWidgetPositioningOptions",
         method: RequestTypes.GET
     };
-    Templates.routeSaveEventToTemplatt = {
+    Templates.routeSaveEventToTemplate = {
         route: "/templates/{id}/saveEventToTemplate",
         method: RequestTypes.POST
     };
