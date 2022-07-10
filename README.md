@@ -6,13 +6,13 @@ BingeWave has a robust API available here: [https://developers.bingewave.com/](h
 ## Installation
 This API is designed for React projects. To install, on your command line run the following in your React root folder:
 
-`npm install bingewave-libraries/react-api --save`
+`npm install bingewave-react-api --save`
 
 ## Using The Library
 
 Once the library is installed, you can use the Library to make calls to the API. An example use case of a user logging in, first import the library at the top of your file:
 
-`import { BWAPI } from  "@BingeWave-Libraries/react-api";`
+`import { BWAPI } from  "bingewave-react-api";`
 
 After the important, the BWAPI objects will contain several classes such as Config, Auth, Events, Products, etc. Typically, we want to make sure the Auth token has been set. If you have retrieved the users Auth token, set it as such:
 

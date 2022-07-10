@@ -40,9 +40,15 @@ class Products {
         method : RequestTypes.DELETE
     }
 
+<<<<<<< HEAD
     public static listProducts(query? : object | null, options? : object | null){
 
         return Requests.get(this.routeListProducts.route, query, options);
+=======
+    public static listProducts(data : object, query? : object | null, options? : object | null){
+
+        return Requests.post(this.routeListProducts.route, data, query, options);
+>>>>>>> ad2da4f8f5830062f13ee103ed07687845c3823c
     }
 
     public static createProducts(data : object, query? : object | null, options? : object | null){
