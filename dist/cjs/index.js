@@ -697,8 +697,8 @@ var Videos = /** @class */ (function () {
 var Products = /** @class */ (function () {
     function Products() {
     }
-    Products.listProducts = function (data, query, options) {
-        return Requests.post(this.routeListProducts.route, data, query, options);
+    Products.listProducts = function (query, options) {
+        return Requests.get(this.routeListProducts.route, query, options);
     };
     Products.createProducts = function (data, query, options) {
         return Requests.post(this.routeCreateProducts.route, data, query, options);

@@ -181,7 +181,7 @@ declare class Products {
     private static routeAddImage;
     private static routeDefaultImage;
     private static routeDeleteImage;
-    static listProducts(data: object, query?: object | null, options?: object | null): Promise<any>;
+    static listProducts(query?: object | null, options?: object | null): Promise<any>;
     static createProducts(data: object, query?: object | null, options?: object | null): Promise<any>;
     static viewProducts(product_id: string, query?: object | null, options?: object | null): Promise<any>;
     static updateProducts(product_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
