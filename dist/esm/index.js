@@ -129,7 +129,7 @@ var Events = /** @class */ (function () {
         return Requests.get(route, query, options);
     };
     Events.getEvents = function (query, options) {
-        return Requests.get(this.routeViewEvent.route, query, options);
+        return Requests.get(this.routeListEvents.route, query, options);
     };
     Events.updateEvent = function (event_id, data, query, options) {
         var route = this.routeUpdateEvent.route.replaceAll('{id}', event_id);
