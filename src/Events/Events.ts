@@ -156,7 +156,7 @@ class Events {
     }
 
     public static getEvents(query? : object | null, options? : object | null) {
-        return Requests.get(this.routeViewEvent.route, query, options);
+        return Requests.get(this.routeListEvents.route, query, options);
     }
 
     public static updateEvent(event_id : string, data : object, query? : object | null, options? : object | null) {
