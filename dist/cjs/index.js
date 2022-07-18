@@ -450,7 +450,7 @@ var Organizers = /** @class */ (function () {
         method: RequestTypes.GET
     };
     Organizers.routeCreateSubscription = {
-        route: "/organizers/{id}/subscription",
+        route: "/organizers/{id}/subscriptions",
         method: RequestTypes.POST
     };
     Organizers.routeCancelSubscription = {

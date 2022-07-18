@@ -55,7 +55,7 @@ class Organizers {
     };
 
     private static routeCreateSubscription: Route = { 
-        route : "/organizers/{id}/subscription",
+        route : "/organizers/{id}/subscriptions",
         method : RequestTypes.POST
     };
 
