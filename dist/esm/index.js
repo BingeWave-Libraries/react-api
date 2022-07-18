@@ -384,6 +384,27 @@ var Organizers = /** @class */ (function () {
         var route = this.routeRemoveUserFromRoleWithOganizer.route.replaceAll('{id}', organizer_id);
         return Requests.post(route, data, query, options);
     };
+    Organizers.createSubscription = function (organizer_id, data, query, options) {
+        var route = this.routeCreateSubscription.route.replaceAll('{id}', organizer_id);
+        return Requests.post(route, data, query, options);
+    };
+    Organizers.getSubscriptions = function (organizer_id, query, options) {
+        var route = this.routeGetSubscriptions.route.replaceAll('{id}', organizer_id);
+        return Requests.get(route, query, options);
+    };
+    Organizers.viewSubscription = function (organizer_id, subscription_id, query, options) {
+        var route = this.routeSingleSubscription.route.replaceAll('{id}', organizer_id);
+        route = route.replaceAll('{subid}', subscription_id);
+        return Requests.get(route, query, options);
+    };
+    Organizers.getCurrentSubscription = function (organizer_id, query, options) {
+        var route = this.routeCurrentSubscription.route.replaceAll('{id}', organizer_id);
+        return Requests.get(route, query, options);
+    };
+    Organizers.cancelSubscription = function (organizer_id, data, query, options) {
+        var route = this.routeCancelSubscription.route.replaceAll('{id}', organizer_id);
+        return Requests.delete(route, data, query, options);
+    };
     Organizers.routeListOrganizers = {
         route: "/organizers",
         method: RequestTypes.GET
@@ -411,6 +432,26 @@ var Organizers = /** @class */ (function () {
     Organizers.routeRemoveUserFromRoleWithOganizer = {
         route: "/organizers/{id}/removeUserFromRole",
         method: RequestTypes.POST
+    };
+    Organizers.routeGetSubscriptions = {
+        route: "/organizers/{id}/subscriptions",
+        method: RequestTypes.GET
+    };
+    Organizers.routeSingleSubscription = {
+        route: "/organizers/{id}/subscriptions/:subid",
+        method: RequestTypes.GET
+    };
+    Organizers.routeCurrentSubscription = {
+        route: "/organizers/{id}/currentSubscription",
+        method: RequestTypes.GET
+    };
+    Organizers.routeCreateSubscription = {
+        route: "/organizers/{id}/subscription",
+        method: RequestTypes.POST
+    };
+    Organizers.routeCancelSubscription = {
+        route: "/organizers/{id}/subscriptions/{subid}",
+        method: RequestTypes.DELETE
     };
     return Organizers;
 }());
