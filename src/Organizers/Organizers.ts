@@ -39,6 +39,33 @@ class Organizers {
         method : RequestTypes.POST
     };
 
+    private static routeGetSubscriptions: Route = { 
+        route : "/organizers/{id}/subscriptions",
+        method : RequestTypes.GET
+    };
+
+    private static routeSingleSubscription: Route = { 
+        route : "/organizers/{id}/subscriptions/:subid",
+        method : RequestTypes.GET
+    };
+
+    private static routeCurrentSubscription: Route = { 
+        route : "/organizers/{id}/currentSubscription",
+        method : RequestTypes.GET
+    };
+
+    private static routeCreateSubscription: Route = { 
+        route : "/organizers/{id}/subscription",
+        method : RequestTypes.POST
+    };
+
+    private static routeCancelSubscription: Route = { 
+        route : "/organizers/{id}/subscriptions/{subid}",
+        method : RequestTypes.DELETE
+    };
+
+    
+
     public static getOrganizers(query? : object | null, options? : object | null) {
         return Requests.get(this.routeListOrganizers.route, query);
     }
@@ -70,6 +97,37 @@ class Organizers {
     public static removeUserFromRole(organizer_id: string, data : object, query? : object | null, options? : object | null) {
         let route = this.routeRemoveUserFromRoleWithOganizer.route.replaceAll('{id}', organizer_id);
         return Requests.post(route, data, query, options);
+    }
+
+    public static createSubscription(organizer_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeCreateSubscription.route.replaceAll('{id}', organizer_id);
+        return Requests.post(route, data, query, options);
+    }
+
+    public static getSubscriptions(organizer_id: string, query? : object | null, options? : object | null) {
+        let route = this.routeGetSubscriptions.route.replaceAll('{id}', organizer_id);
+
+        return Requests.get(route, query, options);
+    }
+
+    public static viewSubscription(organizer_id: string, subscription_id: string,query? : object | null, options? : object | null) {
+        let route = this.routeSingleSubscription.route.replaceAll('{id}', organizer_id);
+
+        route = route.replaceAll('{subid}', subscription_id);
+
+        return Requests.get(route, query, options);
+    }
+
+    public static getCurrentSubscription(organizer_id: string, query? : object | null, options? : object | null) {
+        let route = this.routeCurrentSubscription.route.replaceAll('{id}', organizer_id);
+
+        return Requests.get(route, query, options);
+    }
+
+    public static cancelSubscription(organizer_id: string, data? : object | null, query? : object | null, options? : object | null) {
+        let route = this.routeCancelSubscription.route.replaceAll('{id}', organizer_id);
+
+        return Requests.delete(route, data, query, options);
     }
 
 }
