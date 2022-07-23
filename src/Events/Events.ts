@@ -3,6 +3,145 @@ import Requests from "../Util/Requests";
 import RequestTypes from "../Util/RequestTypes";
 
 class Events {
+    private static routeDisconnectUser: Route = { 
+        route : "/events/{id}/disconnectUser",
+        method : RequestTypes.POST
+    };
+    private static routeConnectUser: Route = { 
+        route : "/events/{id}/connectUser",
+        method : RequestTypes.POST
+    };
+    private static routeAddUserToAudience: Route = { 
+        route : "/events/{id}/removeUserFromStage",
+        method : RequestTypes.POST
+    };
+    private static
+    private static routeAddUserToStage: Route = { 
+        route : "/events/{id}/addUserToStage",
+        method : RequestTypes.POST
+    };
+    private static routeHideUserVideoFromAll: Route = { 
+        route : "/events/{id}/setUserVideoToHidden",
+        method : RequestTypes.POST
+    };
+    private static routeShareUserVideo: Route = { 
+        route : "/events/{id}/shareUserVideo",
+        method : RequestTypes.POST
+    };
+    private static routeShareUserDesktop: Route = { 
+        route : "/events/{id}/shareUserDesktop",
+        method : RequestTypes.POST
+    };
+    private static routeMuteUserAudio: Route = { 
+        route : "/events/{id}/setUserAudioMute",
+        method : RequestTypes.POST
+    };
+    private static routeUnmuteUserAudio: Route = { 
+        route : "/events/{id}/setUserAudioUnmute",
+        method : RequestTypes.POST
+    };
+
+    private static routeTurnOffVideo: Route = { 
+        route : "/events/{id}/setUserVideoOff",
+        method : RequestTypes.POST
+    };
+
+    private static routeTurnOnVideo: Route = { 
+        route : "/events/{id}/setUserVideoOn",
+        method : RequestTypes.POST
+    };
+
+    private static routeUnblockUser: Route = { 
+        route : "/eevents/{id}/unblockAccount",
+        method : RequestTypes.DELETE
+    };
+    private static routeBlockUser: Route = { 
+        route : "/events/{id}/blockAccount",
+        method : RequestTypes.POST
+    };
+
+    private static routeRemoveParticipant: Route = { 
+        route : "/eevents/{id}/removeParticipant",
+        method : RequestTypes.DELETE
+    };
+    private static routeMakeParticipant: Route = { 
+        route : "/events/{id}/makeParticipant",
+        method : RequestTypes.POST
+    };
+    
+    private static routeRemoveAsModerator: Route = { 
+        route : "/eevents/{id}/removeModerator",
+        method : RequestTypes.DELETE
+    };
+    private static routeMakeModerator: Route = { 
+        route : "/events/{id}/makeModerator",
+        method : RequestTypes.POST
+    };
+    private static routeGetUserStatus: Route = {
+        route : "/events/{id}/getUserStatus/{subid}",
+        method : RequestTypes.GET
+    }
+    private static routeOnlineUsers: Route = {
+        route : "/events/{id}/getOnlineUsers",
+        method : RequestTypes.GET
+    }
+    private static routeGetParticipants: Route = {
+        route : "/events/{id}/getParticipants",
+        method : RequestTypes.GET
+    }
+    private static routeRemoveUser: Route = {
+        route : "/events/{id}/removeUserFromAttendees",
+        method : RequestTypes.POST
+    }
+    private static routeAddUser: Route = {
+        route : "/events/{id}/addUserToAttendees",
+        method : RequestTypes.POST
+    }
+    private static routeRefundTicket: Route = {
+        route : "/events/{event_id}/tickets/{ticket_id}/refund",
+        method : RequestTypes.POST
+    }
+    private static routeViewTicket: Route = {
+        route : "/events/{event_id}/tickets/{ticket_id}",
+        method : RequestTypes.GET
+    }
+    private static routeHasTicket: Route = {
+        route : "/events/{event_id}/hasTicket/{account_id",
+        method : RequestTypes.GET
+    }
+    private static routeListTickets: Route = {
+        route : "/events/{id}/tickets",
+        method : RequestTypes.GET
+    }
+    private static routeRegisterAttendee: Route = {
+        route : "/events/{id}/register",
+        method : RequestTypes.POST
+    }
+
+    private static routeDeleteGroup: Route = {
+        route : "/events/{id}/groups/{group_id}",
+        method : RequestTypes.POST
+    }
+    private static routeViewGroup: Route = {
+        route : "/events/{id}/groups/{group_id}",
+        method : RequestTypes.GET
+    }
+    private static routeListGroup: Route = {
+        route : "/events/{id}/groups/{group_id}",
+        method : RequestTypes.GET
+    }
+
+   
+    private static routeUpdateGroup: Route = {
+        route : "/events/{id}/groups/{group_id}",
+        method : RequestTypes.PUT
+    }
+
+ 
+    private static routeCreateGroup: Route = {
+        route : "/events/{id}/groups",
+        method : RequestTypes.POST
+    }
 
     private static routeCreateEvent: Route = { 
         route : "/events",
@@ -311,6 +450,144 @@ class Events {
 
         return Requests.post(route, data, query, options);
     }
+
+    public static createGroup (event_id : string, data : object,query? : object | null,options? : object |null  ) {
+        let route = this.routeCreateGroup.route.replaceAll('{id}',event_id);
+        
+        return Requests.post(route,data,query,options);
+    } 
+    public static updateGroup(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeUpdateGroup.route.replaceAll('{id}', event_id);
+        return Requests.put(route, data, query, options);
+    }
+    public static listGroup(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeListGroup.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static ViewGroup(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeViewGroup.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static deleteGroup(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeDeleteGroup.route, data, query, options);
+    }
+    public static registerAttendee(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeRegisterAttendee.route, data, query, options);
+    }
+    public static listTickets(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeListTickets.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static hasTicket(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeHasTicket.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static viewTicket(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeViewTicket.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static refundTicket(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeRefundTicket.route, data, query, options);
+    }
+    public static addUSer(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeAddUser.route, data, query, options);
+    }
+    public static removeUser(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeRemoveUser.route, data, query, options);
+    }
+    public static getParticipants(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeGetParticipants.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static onlineUsers(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeOnlineUsers.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static getUserStatus(event_id : string,  query? : object | null, options? : object | null) {
+        let route = this.routeGetUserStatus.route.replaceAll('{id}', event_id);
+
+        return Requests.get(route, query, options);
+    }
+    public static makeModerator(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeMakeModerator.route, data, query, options);
+    }
+    public static removeAsModerator(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+
+        return Requests.delete(route, data, query, options);
+    }
+    public static makeParticipant(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeMakeParticipant.route, data, query, options);
+    }
+    public static removeParticipant(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveParticipant.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+
+        return Requests.delete(route, data, query, options);
+    }
+    public static blockUser(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeBlockUser.route, data, query, options);
+    }
+    public static unblockUser(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
+        let route = this.routeUnblockUser.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+
+        return Requests.delete(route, data, query, options);
+    }
+    public static turnOnUserVideo(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeTurnOnVideo.route, data, query, options);
+    }
+    public static turnOffUserVideo(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeTurnOffVideo.route, data, query, options);
+    }
+    public static unmuteUserAduio(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeUnmuteUserAudio.route, data, query, options);
+    }
+    public static muteUserAduio(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeMuteUserAudio.route, data, query, options);
+    }
+    public static shareUserDesktop(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeShareUserDesktop.route, data, query, options);
+    }
+    public static shareUserVideo(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeShareUserVideo.route, data, query, options);
+    }
+    public static hideUserVideo(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeHideUserVideoFromAll.route, data, query, options);
+    }
+    public static addUserToStage(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeAddUserToStage.route, data, query, options);
+    }
+   
+    public static addUserToAudience(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeAddUserToAudience.route, data, query, options);
+    }
+    public static connectUser(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeConnectUser.route, data, query, options);
+    }
+    public static disconnectUser(data : object, query? : object | null, options? : object | null) {
+        return Requests.post(this.routeDisconnectUser.route, data, query, options);
+    }
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    
 
 }
 
