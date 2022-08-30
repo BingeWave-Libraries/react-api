@@ -15,7 +15,7 @@ class Events {
         route : "/events/{id}/removeUserFromStage",
         method : RequestTypes.POST
     };
-    private static
+
     private static routeAddUserToStage: Route = { 
         route : "/events/{id}/addUserToStage",
         method : RequestTypes.POST
@@ -73,10 +73,22 @@ class Events {
         route : "/eevents/{id}/removeModerator",
         method : RequestTypes.DELETE
     };
+
     private static routeMakeModerator: Route = { 
         route : "/events/{id}/makeModerator",
         method : RequestTypes.POST
     };
+
+    private static routeRemoveAsPanelist: Route = { 
+        route : "/eevents/{id}/removePanelist",
+        method : RequestTypes.DELETE
+    };
+
+    private static routeMakePanelist: Route = { 
+        route : "/events/{id}/makePanelist",
+        method : RequestTypes.POST
+    };
+
     private static routeGetUserStatus: Route = {
         route : "/events/{id}/getUserStatus/{subid}",
         method : RequestTypes.GET
@@ -106,7 +118,7 @@ class Events {
         method : RequestTypes.GET
     }
     private static routeHasTicket: Route = {
-        route : "/events/{event_id}/hasTicket/{account_id",
+        route : "/events/{event_id}/hasTicket/{account_id}",
         method : RequestTypes.GET
     }
     private static routeListTickets: Route = {
@@ -283,6 +295,21 @@ class Events {
         method : RequestTypes.GET
     };
 
+    private static routeSetPersonalLayout: Route = { 
+        route : "/events/{id}/setPersonalLayout",
+        method : RequestTypes.POST
+    };
+
+    private static routeChangeVideoDevice: Route = { 
+        route : "/events/{id}/changeVideoInputDevice",
+        method : RequestTypes.POST
+    };
+
+    private static routeChangeAudioDevice: Route = { 
+        route : "/events/{id}/changeAudioInputDevice",
+        method : RequestTypes.POST
+    };
+
 
 
     public static createEvent(data : object, query? : object | null, options? : object | null) {
@@ -456,138 +483,223 @@ class Events {
         
         return Requests.post(route,data,query,options);
     } 
-    public static updateGroup(event_id : string, data : object, query? : object | null, options? : object | null) {
+    public static updateGroup(event_id : string, group_id: string, data : object, query? : object | null, options? : object | null) {
         let route = this.routeUpdateGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+
         return Requests.put(route, data, query, options);
     }
-    public static listGroup(event_id : string,  query? : object | null, options? : object | null) {
+    public static listGroup(event_id : string,  group_id: string, query? : object | null, options? : object | null) {
         let route = this.routeListGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
 
         return Requests.get(route, query, options);
     }
-    public static ViewGroup(event_id : string,  query? : object | null, options? : object | null) {
+    public static viewGroup(event_id : string,  group_id: string, query? : object | null, options? : object | null) {
         let route = this.routeViewGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
 
         return Requests.get(route, query, options);
     }
-    public static deleteGroup(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeDeleteGroup.route, data, query, options);
+    public static deleteGroup(event_id : string,  group_id: string,data : object,  query? : object | null, options? : object | null) {
+        let route = this.routeDeleteGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+
+        Requests.post(route, data, query, options);
     }
-    public static registerAttendee(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeRegisterAttendee.route, data, query, options);
+
+    public static registerAttendee(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeRegisterAttendee.route.replaceAll('{id}', event_id);
+        
+        return Requests.post(route, data, query, options);
     }
+    
     public static listTickets(event_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeListTickets.route.replaceAll('{id}', event_id);
 
         return Requests.get(route, query, options);
     }
-    public static hasTicket(event_id : string,  query? : object | null, options? : object | null) {
+
+    public static hasTicket(event_id : string, account_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeHasTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{account_id}', account_id);
 
         return Requests.get(route, query, options);
     }
-    public static viewTicket(event_id : string,  query? : object | null, options? : object | null) {
+
+    public static viewTicket(event_id : string, ticket_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeViewTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{ticket_id}', ticket_id);
 
         return Requests.get(route, query, options);
     }
-    public static refundTicket(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeRefundTicket.route, data, query, options);
+
+    public static refundTicket(event_id : string, ticket_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeRefundTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{ticket_id}', ticket_id);
+
+        return Requests.post(route, data, query, options);
     }
-    public static addUSer(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeAddUser.route, data, query, options);
+
+    public static addUserToAttenndees(user_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeAddUser.route.replaceAll('{id}', user_id);
+
+        return Requests.post(route, data, query, options);
     }
-    public static removeUser(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeRemoveUser.route, data, query, options);
+
+    public static removeUserFromAttendees(user_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveUser.route.replaceAll('{id}', user_id);
+
+        return Requests.post(route, data, query, options);
     }
+
     public static getParticipants(event_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeGetParticipants.route.replaceAll('{id}', event_id);
 
         return Requests.get(route, query, options);
     }
+
     public static onlineUsers(event_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeOnlineUsers.route.replaceAll('{id}', event_id);
 
         return Requests.get(route, query, options);
     }
+
     public static getUserStatus(event_id : string,  query? : object | null, options? : object | null) {
         let route = this.routeGetUserStatus.route.replaceAll('{id}', event_id);
 
         return Requests.get(route, query, options);
     }
-    public static makeModerator(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeMakeModerator.route, data, query, options);
+
+    public static makeModerator(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        return Requests.post(route , data, query, options);
     }
+
     public static removeAsModerator(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
         let route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
-        route = route.replaceAll('{subid}', message_id);
 
         return Requests.delete(route, data, query, options);
     }
+
+    public static makePanelist(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeMakePanelist.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static removePanelist(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
+        let route = this.routeRemoveAsPanelist.route.replaceAll('{id}', event_id);
+
+        return Requests.delete(route, data, query, options);
+    }
+
     public static makeParticipant(data : object, query? : object | null, options? : object | null) {
         return Requests.post(this.routeMakeParticipant.route, data, query, options);
     }
+
     public static removeParticipant(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
         let route = this.routeRemoveParticipant.route.replaceAll('{id}', event_id);
-        route = route.replaceAll('{subid}', message_id);
 
         return Requests.delete(route, data, query, options);
     }
-    public static blockUser(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeBlockUser.route, data, query, options);
+
+    public static blockUser(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeBlockUser.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
     }
+
     public static unblockUser(event_id : string, message_id : string, data? : object | null, query? : object | null, options? : object | null) {
         let route = this.routeUnblockUser.route.replaceAll('{id}', event_id);
         route = route.replaceAll('{subid}', message_id);
 
         return Requests.delete(route, data, query, options);
     }
-    public static turnOnUserVideo(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeTurnOnVideo.route, data, query, options);
-    }
-    public static turnOffUserVideo(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeTurnOffVideo.route, data, query, options);
-    }
-    public static unmuteUserAduio(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeUnmuteUserAudio.route, data, query, options);
-    }
-    public static muteUserAduio(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeMuteUserAudio.route, data, query, options);
-    }
-    public static shareUserDesktop(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeShareUserDesktop.route, data, query, options);
-    }
-    public static shareUserVideo(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeShareUserVideo.route, data, query, options);
-    }
-    public static hideUserVideo(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeHideUserVideoFromAll.route, data, query, options);
-    }
-    public static addUserToStage(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeAddUserToStage.route, data, query, options);
-    }
-   
-    public static addUserToAudience(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeAddUserToAudience.route, data, query, options);
-    }
-    public static connectUser(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeConnectUser.route, data, query, options);
-    }
-    public static disconnectUser(data : object, query? : object | null, options? : object | null) {
-        return Requests.post(this.routeDisconnectUser.route, data, query, options);
+
+    public static turnOnUserVideo(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeTurnOnVideo.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
     }
 
+    public static turnOffUserVideo(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeTurnOffVideo.route.replaceAll('{id}', event_id);
 
+        return Requests.post(route, data, query, options);
+    }
+
+    public static unmuteUserAduio(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeUnmuteUserAudio.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static muteUserAduio(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeMuteUserAudio.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static shareUserDesktop(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeShareUserDesktop.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static shareUserVideo(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeShareUserVideo.route.replaceAll('{id}', event_id);
+        
+        return Requests.post(route, data, query, options);
+    }
+
+    public static hideUserVideo(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeHideUserVideoFromAll.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static addUserToStage(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeAddUserToStage.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
    
-   
-   
-   
-   
-   
-   
-   
-   
-    
+    public static addUserToAudience(event_id: string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeAddUserToAudience.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static connectUser(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeConnectUser.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static disconnectUser(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeDisconnectUser.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static setPersonalLayout(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeSetPersonalLayout.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static setVideoInputDevice(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeChangeVideoDevice.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
+    public static setAudioInputDevice(event_id : string, data : object, query? : object | null, options? : object | null) {
+        let route = this.routeChangeAudioDevice.route.replaceAll('{id}', event_id);
+
+        return Requests.post(route, data, query, options);
+    }
+
 
 }
 
