@@ -9,6 +9,40 @@ declare class Auth {
 }
 
 declare class Events {
+    private static routeDisconnectUser;
+    private static routeConnectUser;
+    private static routeAddUserToAudience;
+    private static routeAddUserToStage;
+    private static routeHideUserVideoFromAll;
+    private static routeShareUserVideo;
+    private static routeShareUserDesktop;
+    private static routeMuteUserAudio;
+    private static routeUnmuteUserAudio;
+    private static routeTurnOffVideo;
+    private static routeTurnOnVideo;
+    private static routeUnblockUser;
+    private static routeBlockUser;
+    private static routeRemoveParticipant;
+    private static routeMakeParticipant;
+    private static routeRemoveAsModerator;
+    private static routeMakeModerator;
+    private static routeRemoveAsPanelist;
+    private static routeMakePanelist;
+    private static routeGetUserStatus;
+    private static routeOnlineUsers;
+    private static routeGetParticipants;
+    private static routeRemoveUser;
+    private static routeAddUser;
+    private static routeRefundTicket;
+    private static routeViewTicket;
+    private static routeHasTicket;
+    private static routeListTickets;
+    private static routeRegisterAttendee;
+    private static routeDeleteGroup;
+    private static routeViewGroup;
+    private static routeListGroup;
+    private static routeUpdateGroup;
+    private static routeCreateGroup;
     private static routeCreateEvent;
     private static routeListEvents;
     private static routeUpdateEvent;
@@ -37,6 +71,9 @@ declare class Events {
     private static routeRemoveWidget;
     private static routeSetOptionsWidget;
     private static routeGetOptionsWidget;
+    private static routeSetPersonalLayout;
+    private static routeChangeVideoDevice;
+    private static routeChangeAudioDevice;
     static createEvent(data: object, query?: object | null, options?: object | null): Promise<any>;
     static viewEvent(event_id: string, query?: object | null, options?: object | null): Promise<any>;
     static getEvents(query?: object | null, options?: object | null): Promise<any>;
@@ -65,6 +102,43 @@ declare class Events {
     static getState(event_id: string, key: any, query?: object | null, options?: object | null): Promise<any>;
     static incrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
     static decrementStateBy(event_id: string, key: any, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static createGroup(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static updateGroup(event_id: string, group_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static listGroup(event_id: string, group_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static viewGroup(event_id: string, group_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static deleteGroup(event_id: string, group_id: string, data: object, query?: object | null, options?: object | null): void;
+    static registerAttendee(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static listTickets(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static hasTicket(event_id: string, account_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static viewTicket(event_id: string, ticket_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static refundTicket(event_id: string, ticket_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static addUserToAttenndees(user_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removeUserFromAttendees(user_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static getParticipants(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static onlineUsers(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static getUserStatus(event_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static makeModerator(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removeAsModerator(event_id: string, message_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static makePanelist(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removePanelist(event_id: string, message_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static makeParticipant(data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removeParticipant(event_id: string, message_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static blockUser(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static unblockUser(event_id: string, message_id: string, data?: object | null, query?: object | null, options?: object | null): Promise<any>;
+    static turnOnUserVideo(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static turnOffUserVideo(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static unmuteUserAduio(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static muteUserAduio(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static shareUserDesktop(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static shareUserVideo(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static hideUserVideo(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static addUserToStage(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static addUserToAudience(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static connectUser(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static disconnectUser(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setPersonalLayout(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setVideoInputDevice(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setAudioInputDevice(event_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 
 declare class Config {

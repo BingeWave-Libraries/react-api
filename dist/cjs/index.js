@@ -244,6 +244,297 @@ var Events = /** @class */ (function () {
         route = route.replaceAll('{key}', key);
         return Requests.post(route, data, query, options);
     };
+    Events.createGroup = function (event_id, data, query, options) {
+        var route = this.routeCreateGroup.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.updateGroup = function (event_id, group_id, data, query, options) {
+        var route = this.routeUpdateGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+        return Requests.put(route, data, query, options);
+    };
+    Events.listGroup = function (event_id, group_id, query, options) {
+        var route = this.routeListGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+        return Requests.get(route, query, options);
+    };
+    Events.viewGroup = function (event_id, group_id, query, options) {
+        var route = this.routeViewGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+        return Requests.get(route, query, options);
+    };
+    Events.deleteGroup = function (event_id, group_id, data, query, options) {
+        var route = this.routeDeleteGroup.route.replaceAll('{id}', event_id);
+        route.replaceAll('{group_id}', group_id);
+        Requests.post(route, data, query, options);
+    };
+    Events.registerAttendee = function (event_id, data, query, options) {
+        var route = this.routeRegisterAttendee.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.listTickets = function (event_id, query, options) {
+        var route = this.routeListTickets.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.hasTicket = function (event_id, account_id, query, options) {
+        var route = this.routeHasTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{account_id}', account_id);
+        return Requests.get(route, query, options);
+    };
+    Events.viewTicket = function (event_id, ticket_id, query, options) {
+        var route = this.routeViewTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{ticket_id}', ticket_id);
+        return Requests.get(route, query, options);
+    };
+    Events.refundTicket = function (event_id, ticket_id, data, query, options) {
+        var route = this.routeRefundTicket.route.replaceAll('{id}', event_id);
+        route.replaceAll('{ticket_id}', ticket_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.addUserToAttenndees = function (user_id, data, query, options) {
+        var route = this.routeAddUser.route.replaceAll('{id}', user_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.removeUserFromAttendees = function (user_id, data, query, options) {
+        var route = this.routeRemoveUser.route.replaceAll('{id}', user_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.getParticipants = function (event_id, query, options) {
+        var route = this.routeGetParticipants.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.onlineUsers = function (event_id, query, options) {
+        var route = this.routeOnlineUsers.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.getUserStatus = function (event_id, query, options) {
+        var route = this.routeGetUserStatus.route.replaceAll('{id}', event_id);
+        return Requests.get(route, query, options);
+    };
+    Events.makeModerator = function (event_id, data, query, options) {
+        var route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.removeAsModerator = function (event_id, message_id, data, query, options) {
+        var route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.makePanelist = function (event_id, data, query, options) {
+        var route = this.routeMakePanelist.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.removePanelist = function (event_id, message_id, data, query, options) {
+        var route = this.routeRemoveAsPanelist.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.makeParticipant = function (data, query, options) {
+        return Requests.post(this.routeMakeParticipant.route, data, query, options);
+    };
+    Events.removeParticipant = function (event_id, message_id, data, query, options) {
+        var route = this.routeRemoveParticipant.route.replaceAll('{id}', event_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.blockUser = function (event_id, data, query, options) {
+        var route = this.routeBlockUser.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.unblockUser = function (event_id, message_id, data, query, options) {
+        var route = this.routeUnblockUser.route.replaceAll('{id}', event_id);
+        route = route.replaceAll('{subid}', message_id);
+        return Requests.delete(route, data, query, options);
+    };
+    Events.turnOnUserVideo = function (event_id, data, query, options) {
+        var route = this.routeTurnOnVideo.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.turnOffUserVideo = function (event_id, data, query, options) {
+        var route = this.routeTurnOffVideo.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.unmuteUserAduio = function (event_id, data, query, options) {
+        var route = this.routeUnmuteUserAudio.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.muteUserAduio = function (event_id, data, query, options) {
+        var route = this.routeMuteUserAudio.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.shareUserDesktop = function (event_id, data, query, options) {
+        var route = this.routeShareUserDesktop.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.shareUserVideo = function (event_id, data, query, options) {
+        var route = this.routeShareUserVideo.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.hideUserVideo = function (event_id, data, query, options) {
+        var route = this.routeHideUserVideoFromAll.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.addUserToStage = function (event_id, data, query, options) {
+        var route = this.routeAddUserToStage.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.addUserToAudience = function (event_id, data, query, options) {
+        var route = this.routeAddUserToAudience.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.connectUser = function (event_id, data, query, options) {
+        var route = this.routeConnectUser.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.disconnectUser = function (event_id, data, query, options) {
+        var route = this.routeDisconnectUser.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.setPersonalLayout = function (event_id, data, query, options) {
+        var route = this.routeSetPersonalLayout.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.setVideoInputDevice = function (event_id, data, query, options) {
+        var route = this.routeChangeVideoDevice.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.setAudioInputDevice = function (event_id, data, query, options) {
+        var route = this.routeChangeAudioDevice.route.replaceAll('{id}', event_id);
+        return Requests.post(route, data, query, options);
+    };
+    Events.routeDisconnectUser = {
+        route: "/events/{id}/disconnectUser",
+        method: RequestTypes.POST
+    };
+    Events.routeConnectUser = {
+        route: "/events/{id}/connectUser",
+        method: RequestTypes.POST
+    };
+    Events.routeAddUserToAudience = {
+        route: "/events/{id}/removeUserFromStage",
+        method: RequestTypes.POST
+    };
+    Events.routeAddUserToStage = {
+        route: "/events/{id}/addUserToStage",
+        method: RequestTypes.POST
+    };
+    Events.routeHideUserVideoFromAll = {
+        route: "/events/{id}/setUserVideoToHidden",
+        method: RequestTypes.POST
+    };
+    Events.routeShareUserVideo = {
+        route: "/events/{id}/shareUserVideo",
+        method: RequestTypes.POST
+    };
+    Events.routeShareUserDesktop = {
+        route: "/events/{id}/shareUserDesktop",
+        method: RequestTypes.POST
+    };
+    Events.routeMuteUserAudio = {
+        route: "/events/{id}/setUserAudioMute",
+        method: RequestTypes.POST
+    };
+    Events.routeUnmuteUserAudio = {
+        route: "/events/{id}/setUserAudioUnmute",
+        method: RequestTypes.POST
+    };
+    Events.routeTurnOffVideo = {
+        route: "/events/{id}/setUserVideoOff",
+        method: RequestTypes.POST
+    };
+    Events.routeTurnOnVideo = {
+        route: "/events/{id}/setUserVideoOn",
+        method: RequestTypes.POST
+    };
+    Events.routeUnblockUser = {
+        route: "/eevents/{id}/unblockAccount",
+        method: RequestTypes.DELETE
+    };
+    Events.routeBlockUser = {
+        route: "/events/{id}/blockAccount",
+        method: RequestTypes.POST
+    };
+    Events.routeRemoveParticipant = {
+        route: "/eevents/{id}/removeParticipant",
+        method: RequestTypes.DELETE
+    };
+    Events.routeMakeParticipant = {
+        route: "/events/{id}/makeParticipant",
+        method: RequestTypes.POST
+    };
+    Events.routeRemoveAsModerator = {
+        route: "/eevents/{id}/removeModerator",
+        method: RequestTypes.DELETE
+    };
+    Events.routeMakeModerator = {
+        route: "/events/{id}/makeModerator",
+        method: RequestTypes.POST
+    };
+    Events.routeRemoveAsPanelist = {
+        route: "/eevents/{id}/removePanelist",
+        method: RequestTypes.DELETE
+    };
+    Events.routeMakePanelist = {
+        route: "/events/{id}/makePanelist",
+        method: RequestTypes.POST
+    };
+    Events.routeGetUserStatus = {
+        route: "/events/{id}/getUserStatus/{subid}",
+        method: RequestTypes.GET
+    };
+    Events.routeOnlineUsers = {
+        route: "/events/{id}/getOnlineUsers",
+        method: RequestTypes.GET
+    };
+    Events.routeGetParticipants = {
+        route: "/events/{id}/getParticipants",
+        method: RequestTypes.GET
+    };
+    Events.routeRemoveUser = {
+        route: "/events/{id}/removeUserFromAttendees",
+        method: RequestTypes.POST
+    };
+    Events.routeAddUser = {
+        route: "/events/{id}/addUserToAttendees",
+        method: RequestTypes.POST
+    };
+    Events.routeRefundTicket = {
+        route: "/events/{event_id}/tickets/{ticket_id}/refund",
+        method: RequestTypes.POST
+    };
+    Events.routeViewTicket = {
+        route: "/events/{event_id}/tickets/{ticket_id}",
+        method: RequestTypes.GET
+    };
+    Events.routeHasTicket = {
+        route: "/events/{event_id}/hasTicket/{account_id}",
+        method: RequestTypes.GET
+    };
+    Events.routeListTickets = {
+        route: "/events/{id}/tickets",
+        method: RequestTypes.GET
+    };
+    Events.routeRegisterAttendee = {
+        route: "/events/{id}/register",
+        method: RequestTypes.POST
+    };
+    Events.routeDeleteGroup = {
+        route: "/events/{id}/groups/{group_id}",
+        method: RequestTypes.POST
+    };
+    Events.routeViewGroup = {
+        route: "/events/{id}/groups/{group_id}",
+        method: RequestTypes.GET
+    };
+    Events.routeListGroup = {
+        route: "/events/{id}/groups/{group_id}",
+        method: RequestTypes.GET
+    };
+    Events.routeUpdateGroup = {
+        route: "/events/{id}/groups/{group_id}",
+        method: RequestTypes.PUT
+    };
+    Events.routeCreateGroup = {
+        route: "/events/{id}/groups",
+        method: RequestTypes.POST
+    };
     Events.routeCreateEvent = {
         route: "/events",
         method: RequestTypes.POST
@@ -355,6 +646,18 @@ var Events = /** @class */ (function () {
     Events.routeGetOptionsWidget = {
         route: "/events/{id}/getWidgetPositioningOptions",
         method: RequestTypes.GET
+    };
+    Events.routeSetPersonalLayout = {
+        route: "/events/{id}/setPersonalLayout",
+        method: RequestTypes.POST
+    };
+    Events.routeChangeVideoDevice = {
+        route: "/events/{id}/changeVideoInputDevice",
+        method: RequestTypes.POST
+    };
+    Events.routeChangeAudioDevice = {
+        route: "/events/{id}/changeAudioInputDevice",
+        method: RequestTypes.POST
     };
     return Events;
 }());
