@@ -52,7 +52,7 @@ class Events {
     };
 
     private static routeUnblockUser: Route = { 
-        route : "/eevents/{id}/unblockAccount",
+        route : "/events/{id}/unblockAccount",
         method : RequestTypes.DELETE
     };
     private static routeBlockUser: Route = { 
@@ -61,7 +61,7 @@ class Events {
     };
 
     private static routeRemoveParticipant: Route = { 
-        route : "/eevents/{id}/removeParticipant",
+        route : "/events/{id}/removeParticipant",
         method : RequestTypes.DELETE
     };
     private static routeMakeParticipant: Route = { 
@@ -70,7 +70,7 @@ class Events {
     };
     
     private static routeRemoveAsModerator: Route = { 
-        route : "/eevents/{id}/removeModerator",
+        route : "/events/{id}/removeModerator",
         method : RequestTypes.DELETE
     };
 
@@ -80,7 +80,7 @@ class Events {
     };
 
     private static routeRemoveAsPanelist: Route = { 
-        route : "/eevents/{id}/removePanelist",
+        route : "/events/{id}/removePanelist",
         method : RequestTypes.DELETE
     };
 
@@ -572,7 +572,7 @@ class Events {
     }
 
     public static makeModerator(event_id : string, data : object, query? : object | null, options? : object | null) {
-        let route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        let route = this.routeMakeModerator.route.replaceAll('{id}', event_id);
         return Requests.post(route , data, query, options);
     }
 

@@ -400,7 +400,7 @@ var Events = /** @class */ (function () {
         return Requests.get(route, query, options);
     };
     Events.makeModerator = function (event_id, data, query, options) {
-        var route = this.routeRemoveAsModerator.route.replaceAll('{id}', event_id);
+        var route = this.routeMakeModerator.route.replaceAll('{id}', event_id);
         return Requests.post(route, data, query, options);
     };
     Events.removeAsModerator = function (event_id, message_id, data, query, options) {
@@ -532,7 +532,7 @@ var Events = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Events.routeUnblockUser = {
-        route: "/eevents/{id}/unblockAccount",
+        route: "/events/{id}/unblockAccount",
         method: RequestTypes.DELETE
     };
     Events.routeBlockUser = {
@@ -540,7 +540,7 @@ var Events = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Events.routeRemoveParticipant = {
-        route: "/eevents/{id}/removeParticipant",
+        route: "/events/{id}/removeParticipant",
         method: RequestTypes.DELETE
     };
     Events.routeMakeParticipant = {
@@ -548,7 +548,7 @@ var Events = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Events.routeRemoveAsModerator = {
-        route: "/eevents/{id}/removeModerator",
+        route: "/events/{id}/removeModerator",
         method: RequestTypes.DELETE
     };
     Events.routeMakeModerator = {
@@ -556,7 +556,7 @@ var Events = /** @class */ (function () {
         method: RequestTypes.POST
     };
     Events.routeRemoveAsPanelist = {
-        route: "/eevents/{id}/removePanelist",
+        route: "/events/{id}/removePanelist",
         method: RequestTypes.DELETE
     };
     Events.routeMakePanelist = {
