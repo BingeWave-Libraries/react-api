@@ -118,6 +118,94 @@ var Auth = /** @class */ (function () {
     return Auth;
 }());
 
+var Accounts = /** @class */ (function () {
+    function Accounts() {
+    }
+    Accounts.getProfile = function (user_id, query, options) {
+        var route = this.routeProfile.route.replaceAll('{id}', user_id);
+        return Requests.get(route, query, options);
+    };
+    Accounts.getAccounts = function (query, options) {
+        var route = this.routeList.route;
+        return Requests.get(route, query, options);
+    };
+    Accounts.getMyTickets = function (query, options) {
+        var route = this.routeMyTickets.route;
+        return Requests.get(route, query, options);
+    };
+    Accounts.getMe = function (query, options) {
+        var route = this.routeMe.route;
+        return Requests.get(route, query, options);
+    };
+    Accounts.updateAccount = function (data, query, options) {
+        var route = this.routeUpdate.route;
+        return Requests.put(route, data, query, options);
+    };
+    Accounts.setPreference = function (user_id, data, query, options) {
+        var route = this.routeSetPreference.route.replaceAll('{id}', user_id);
+        return Requests.post(route, data, query, options);
+    };
+    Accounts.removePreference = function (user_id, key, data, query, options) {
+        var route = this.routeRemovePreference.route.replaceAll('{id}', user_id);
+        route.replaceAll('{key}', key);
+        return Requests.delete(route, data, query, options);
+    };
+    Accounts.setSecurePreference = function (user_id, data, query, options) {
+        var route = this.routeSetSecurePreference.route.replaceAll('{id}', user_id);
+        return Requests.post(route, data, query, options);
+    };
+    Accounts.removeSecurePreference = function (user_id, key, data, query, options) {
+        var route = this.routeRemoveSecurePreference.route.replaceAll('{id}', user_id);
+        route.replaceAll('{key}', key);
+        return Requests.delete(route, data, query, options);
+    };
+    Accounts.routeProfile = {
+        route: "/accounts/{id}",
+        method: RequestTypes.GET
+    };
+    Accounts.routeList = {
+        route: "/accounts",
+        method: RequestTypes.GET
+    };
+    Accounts.routeUpdate = {
+        route: "/accounts",
+        method: RequestTypes.PUT
+    };
+    Accounts.routeMyTickets = {
+        route: "/accounts/mytickets",
+        method: RequestTypes.GET
+    };
+    Accounts.routeMe = {
+        route: "/accounts/me",
+        method: RequestTypes.GET
+    };
+    Accounts.routeSetPreference = {
+        route: "/accounts/{id}/setPreference",
+        method: RequestTypes.POST
+    };
+    Accounts.routeRemovePreference = {
+        route: "/accounts/{id}/removePreference/{key}",
+        method: RequestTypes.DELETE
+    };
+    Accounts.routeSetSecurePreference = {
+        route: "/accounts/{id}/setSecurePreference",
+        method: RequestTypes.POST
+    };
+    Accounts.routeRemoveSecurePreference = {
+        route: "/accounts/{id}/removeSecurePreference/{key}",
+        method: RequestTypes.DELETE
+    };
+    Accounts.routeSetProfileImage = {
+        route: "/accounts/{id}/setProfileImage",
+        method: RequestTypes.POST
+    };
+    Accounts.routeSetAvatarImage = {
+        route: "/accounts/{id}/setProfileImage",
+        method: RequestTypes.POST
+    };
+    return Accounts;
+}());
+
 var Events = /** @class */ (function () {
     function Events() {
     }
@@ -1100,6 +1188,7 @@ var BWAPI = /** @class */ (function () {
     function BWAPI() {
     }
     BWAPI.Auth = Auth;
+    BWAPI.Accounts = Accounts;
     BWAPI.Config = Config;
     BWAPI.Events = Events;
     BWAPI.Organizers = Organizers;
@@ -1110,5 +1199,5 @@ var BWAPI = /** @class */ (function () {
     return BWAPI;
 }());
 
-export { Auth, BWAPI, Config, Events, Organizers, Products, Templates, Videos, Widgets };
+export { Accounts, Auth, BWAPI, Config, Events, Organizers, Products, Templates, Videos, Widgets };
 //# sourceMappingURL=index.js.map

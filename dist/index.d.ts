@@ -8,6 +8,29 @@ declare class Auth {
     static register(data: object, query?: object | null, options?: object | null): Promise<any>;
 }
 
+declare class Accounts {
+    private static routeProfile;
+    private static routeList;
+    private static routeUpdate;
+    private static routeMyTickets;
+    private static routeMe;
+    private static routeSetPreference;
+    private static routeRemovePreference;
+    private static routeSetSecurePreference;
+    private static routeRemoveSecurePreference;
+    private static routeSetProfileImage;
+    private static routeSetAvatarImage;
+    static getProfile(user_id: string, query?: object | null, options?: object | null): Promise<any>;
+    static getAccounts(query?: object | null, options?: object | null): Promise<any>;
+    static getMyTickets(query?: object | null, options?: object | null): Promise<any>;
+    static getMe(query?: object | null, options?: object | null): Promise<any>;
+    static updateAccount(data: object, query?: object | null, options?: object | null): Promise<any>;
+    static setPreference(user_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removePreference(user_id: string, key: string, data?: object | null | undefined, query?: object | null, options?: object | null): Promise<any>;
+    static setSecurePreference(user_id: string, data: object, query?: object | null, options?: object | null): Promise<any>;
+    static removeSecurePreference(user_id: string, key: string, data?: object | null | undefined, query?: object | null, options?: object | null): Promise<any>;
+}
+
 declare class Events {
     private static routeDisconnectUser;
     private static routeConnectUser;
@@ -276,6 +299,7 @@ declare class Products {
 
 declare class BWAPI {
     static Auth: Auth;
+    static Accounts: Accounts;
     static Config: Config;
     static Events: Events;
     static Organizers: Organizers;
@@ -285,4 +309,4 @@ declare class BWAPI {
     static Videos: Videos;
 }
 
-export { Auth, BWAPI, Config, Events, Organizers, Products, Templates, Videos, Widgets };
+export { Accounts, Auth, BWAPI, Config, Events, Organizers, Products, Templates, Videos, Widgets };

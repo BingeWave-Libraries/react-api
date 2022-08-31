@@ -1,4 +1,5 @@
 import Auth from "./Auth";
+import Accounts from "./Accounts";
 import Events from "./Events";
 import Config from "./Config";
 import Organizers from "./Organizers";
@@ -8,6 +9,7 @@ import Videos from "./Videos";
 import Products from "./Products";
 declare class BWAPI {
     static Auth: Auth;
+    static Accounts: Accounts;
     static Config: Config;
     static Events: Events;
     static Organizers: Organizers;
@@ -17,6 +19,7 @@ declare class BWAPI {
     static Videos: Videos;
 }
 export { Auth };
+export { Accounts };
 export { Config };
 export { Events };
 export { Organizers };

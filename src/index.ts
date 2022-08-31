@@ -1,4 +1,5 @@
 import Auth from "./Auth";
+import Accounts from "./Accounts";
 import Events from "./Events";
 import Config from "./Config";
 import Organizers from "./Organizers";
@@ -10,6 +11,8 @@ import Products from "./Products"
 class BWAPI {
 
     public static Auth: Auth = Auth;
+
+    public static Accounts: Accounts = Accounts;
 
     public static Config: Config = Config;
 
@@ -28,6 +31,7 @@ class BWAPI {
 }
 
 export {Auth};
+export {Accounts}
 export {Config};
 export {Events};
 export {Organizers};
